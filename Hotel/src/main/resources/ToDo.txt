@@ -1,0 +1,16 @@
+1. Actualizar el UML.
+
+2. Menú de Cliente: 
+    A. Agregar un cliente nuevo.
+    
+3. Hacer el Menú de Hotel:
+    A. Agregar un hotel nuevo.
+    
+4. Menú de Reserva:
+    A. Agregar una reserva nueva.
+    B. Crear el circuito entre reserva-hotel-habitación
+     
+5. Menú de Habitación:
+    A. Agregar una habitacion nueva.
+
+6. Repasar toda la aplicación.
