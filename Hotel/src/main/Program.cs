@@ -30,7 +30,7 @@ public class Program
     }
 
     private static void UploadData()
-    {
+    {// Legajo --> 854851
         _cliente = new S_Cliente().GetClientData(GetLegajo());
         _cliente.usuario = "888086";
         _hotels = new S_Hotel().GetHotelesData(_cliente.usuario);

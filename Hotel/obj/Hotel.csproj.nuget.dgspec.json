@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/Hotel.csproj": {}
+    "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/Hotel.csproj": {}
   },
   "projects": {
-    "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/Hotel.csproj": {
+    "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/Hotel.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/Hotel.csproj",
+        "projectUniqueName": "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/Hotel.csproj",
         "projectName": "Hotel",
-        "projectPath": "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/Hotel.csproj",
+        "projectPath": "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/Hotel.csproj",
         "packagesPath": "/Users/fernando.odorico/.nuget/packages/",
-        "outputPath": "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/obj/",
+        "outputPath": "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/fernando.odorico/.nuget/NuGet/NuGet.Config"

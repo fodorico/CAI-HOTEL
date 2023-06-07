@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4Jl3tGZDy7epnrkpjqE1IuhpTisLcx1B8MB9QNnU7EJGMKYH6yBSDI2/LCuBSx0ADknGwMjcnPFLLg/vSGpu4A==",
+  "dgSpecHash": "/Mk0YvT1zPqgprRXog8GEbo1nM21Y7vcsjdElx99PvYm1kTNy64Axyd/noZu/gxukkFquDuT10bXo3DkF3Hl1Q==",
   "success": true,
-  "projectFilePath": "/Users/fernando.odorico/Pictures/Github/CAI/Hotel/Hotel.csproj",
+  "projectFilePath": "/Users/fernando.odorico/Pictures/Github/CAI-HOTEL/Hotel/Hotel.csproj",
   "expectedPackageFiles": [
     "/Users/fernando.odorico/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512"
   ],
