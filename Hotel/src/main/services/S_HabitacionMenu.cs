@@ -6,33 +6,38 @@ namespace Hotel.main.services;
 
 public class S_HabitacionMenu
 {
-    public void HabitacionMenu(Habitacion h)
-    {
-        var opt = true;
-        while (opt)
-        {
-            Console.Clear();
-            ShowData();
-            ShowDataHabitacion(h);
-            opt = SwitchMenuHabitacion(ShowMenuHabitacion(), h);
-        }
-    }
+    private static List<Habitacion> _habitacions;
 
-    public void HabitacionMenu(List<Habitacion> h)
+    public void HabitacionMenu(List<entity.Hotel> h, List<Reserva> r)
     {
+        GetAllRooms(h, r);
         var opt = true;
         while (opt)
         {
             Console.Clear();
             ShowData();
-            foreach (var habitacion in h)
+            foreach (var habitacion in _habitacions)
             {
                 ShowDataHabitacion(habitacion);
             }
 
+            opt = !Comment.StopToThink();
+            //opt = SwitchAndValidate(h);
             var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
                 999, true);
-            opt = SwitchMenuHabitacion(ShowMenuHabitacion(), h.FirstOrDefault(t => t.id == cod));
+            opt = SwitchMenuHabitacion(ShowMenuHabitacion(), _habitacions.FirstOrDefault(t => t.id == cod));
+        }
+    }
+
+    private void GetAllRooms(List<entity.Hotel> hotels, List<Reserva> reservas)
+    {
+        List<int> habList = null;
+        habList.AddRange(reservas.Select(r => r.idHabitacion));
+
+        foreach (var ha in hotels.Select(h => new S_Habitacion().GetHabitacionData(h.id.ToString())).SelectMany(temp =>
+                     from ha in temp let temp2 = habList.FirstOrDefault(t => t == ha.id) where temp2 != null select ha))
+        {
+            _habitacions.Add(ha);
         }
     }
 
@@ -52,6 +57,26 @@ public class S_HabitacionMenu
         Console.WriteLine("     Precio: " + h.precio);
         Console.WriteLine("     Cancelable: " + (h.cancelable ? "Sí" : "No"));
         Console.WriteLine("══════════════════════════════════════════════════════");
+    }
+
+    private bool SwitchAndValidate(List<Habitacion> h)
+    {
+        Habitacion hab;
+        while (true)
+        {
+            var cod = ValidateInput.ValidateInteger(
+                "Por favor escriba el Código de la Habitacion que desea modificar: ", 0,
+                999, true);
+            hab = h.FirstOrDefault(t => t.id == cod);
+            if (hab != null)
+            {
+                break;
+            }
+
+            Console.WriteLine("Por favor coloque un código valido!");
+        }
+
+        return SwitchMenuHabitacion(ShowMenuHabitacion(), hab);
     }
 
     private int ShowMenuHabitacion()

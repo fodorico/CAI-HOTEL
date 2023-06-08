@@ -1,16 +1,39 @@
+//.................................................\\
+➢ Poder ingresar y consultar clientes, siempre utilizando el legajo de un mismo integrante del equipo.
+➢ Ingresar y consultar reservas, siempre utilizando el código de la reserva.
+➢ Ingresar y consultar hoteles, siempre utilizando el código de la reserva.
+➢ Ingresar y consultar habitaciones, siempre utilizando el código de la reserva.
+➢ Poder emitir un reporte de reservas por cliente.
+➢ Poder emitir un reporte de habitación por hotel.
+//.................................................\\
+
 1. Actualizar el UML.
 
 2. Menú de Cliente: 
-    A. Agregar un cliente nuevo.
+    A. Agregar un Cliente nuevo. (Consultar)
+        B. Modificar un Cliente. (Listo)
+    C. Borrar un Cliente. (Consultar)
+        D. Visualizar los datos de un Cliente. (Listo)
     
 3. Hacer el Menú de Hotel:
-    A. Agregar un hotel nuevo.
+    A. Agregar un Hotel nuevo. (Consultar)
+        B. Modificar un Hotel. (Listo) (Consultar)
+    C. Borrar un Hotel. (Consultar)
+        D. Visualizar los datos de un Hotel. (Listo)
     
 4. Menú de Reserva:
-    A. Agregar una reserva nueva.
-    B. Crear el circuito entre reserva-hotel-habitación
+    A. Agregar una Reserva nueva. (Consultar)
+        B. Modificar una Reserva. (Listo) (Consultar)
+    C. Borrar una Reserva. (Consultar)
+        D. Visualizar los datos de una Reserva. (Listo)
+    
      
 5. Menú de Habitación:
-    A. Agregar una habitacion nueva.
+    A. Agregar una Habitación nueva. (Consultar)
+        B. Modificar una Habitación. (Listo) (Consultar)
+    C. Borrar una Habitación. (Consultar)
+        D. Visualizar los datos de una Habitación. (Listo)
 
+7. Crear el circuito completo (Cliente-Reserva-Hotel-Habitación)
 6. Repasar toda la aplicación.
+

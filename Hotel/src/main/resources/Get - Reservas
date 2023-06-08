@@ -1,0 +1,27 @@
+//-------------------------------------------------------\\
+/api/v1/Hotel/Reservas
+[
+  {
+    "idHabitacion": 120,
+    "idCliente": 845,
+    "cantidadHuespedes": 2,
+    "fechaIngreso": "2023-01-07T00:00:00",
+    "fechaEgreso": "2023-01-09T00:00:00",
+    "usuario": 888086,
+    "id": 146
+  }
+]
+//-------------------------------------------------------\\
+/api/v1/Hotel/Reservas/{registro}
+[
+{
+    "idHabitacion": 120,
+    "idCliente": 845,
+    "cantidadHuespedes": 2,
+    "fechaIngreso": "2023-01-07T00:00:00",
+    "fechaEgreso": "2023-01-09T00:00:00",
+    "usuario": 888086,
+    "id": 146
+  }
+]
+//-------------------------------------------------------\\

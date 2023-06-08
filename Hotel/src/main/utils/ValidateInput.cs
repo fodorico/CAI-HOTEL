@@ -5,7 +5,7 @@ namespace Utils;
 public static class ValidateInput
 {
     public const string ConfirmMessage = "Desea guardar este cambio? (Si / No): ";
-    private const string Message = "Por favor, ingrese un valor correcto!";
+    private const string Message = "Por favor, ingrese un valor correcto! ";
 
     public static string ValidateString(string text, string optional = "", string[]? list = null)
     {
@@ -27,7 +27,7 @@ public static class ValidateInput
             }
 
             Console.Clear();
-            Console.WriteLine(Message);
+            Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
 
@@ -52,7 +52,7 @@ public static class ValidateInput
             }
 
             Console.Clear();
-            Console.WriteLine(Message);
+            Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
 
@@ -68,7 +68,7 @@ public static class ValidateInput
             }
 
             Console.Clear();
-            Console.WriteLine(Message);
+            Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
 
@@ -82,13 +82,20 @@ public static class ValidateInput
             {
                 if (input != null)
                 {
-                    return DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    var dateTime = DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture);
+                    if (dateTime < DateTime.Now)
+                    {
+                        return dateTime;
+                    }
                 }
+
+                Console.Clear();
+                Console.WriteLine(Message + "No coloque una fecha vacía, ni tampoco superior a la fecha de hoy");
             }
             catch (Exception)
             {
                 Console.Clear();
-                Console.WriteLine(Message);
+                Console.WriteLine(Message + "Coloque un valor tal como se solicitó.");
             }
         }
     }
@@ -109,7 +116,7 @@ public static class ValidateInput
             catch (Exception)
             {
                 Console.Clear();
-                Console.WriteLine(Message);
+                Console.WriteLine(Message + "Coloque un valor que corresponda.");
             }
         }
     }
@@ -130,7 +137,7 @@ public static class ValidateInput
             catch (Exception)
             {
                 Console.Clear();
-                Console.WriteLine(Message);
+                Console.WriteLine(Message + "Coloque un valor que corresponda.");
             }
         }
     }

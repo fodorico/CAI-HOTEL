@@ -1,0 +1,25 @@
+//-------------------------------------------------------\\
+/api/v1/Hotel/Hoteles
+[
+  {
+    "estrellas": 4,
+    "nombre": "Hotel King",
+    "direccion": "Av. Reyes 800",
+    "amenities": true,
+    "usuario": 888086,
+    "id": 68
+  }
+]
+//-------------------------------------------------------\\
+/api/v1/Hotel/Hoteles/{registro}
+[
+  {
+    "estrellas": 4,
+    "nombre": "Hotel King",
+    "direccion": "Av. Reyes 800",
+    "amenities": true,
+    "usuario": 888086,
+    "id": 68
+  }
+]
+//-------------------------------------------------------\\

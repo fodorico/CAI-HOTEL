@@ -1,0 +1,14 @@
+//-------------------------------------------------------\\
+/api/v1/Hotel/Habitaciones/{idHotel}
+[
+  {
+    "idHotel": 67,
+    "cantidadPlazas": 1,
+    "categoria": "Single",
+    "precio": 2500,
+    "cancelable": true,
+    "usuario": 888086,
+    "id": 123
+  }
+]
+//-------------------------------------------------------\\

@@ -30,10 +30,8 @@ public class S_ReservaMenu
             {
                 ShowDataReserva(reserva);
             }
-
-            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
-                999, true);
-            opt = SwitchMenuReserva(ShowMenuReserva(), r.FirstOrDefault(t => t.id == cod));
+            opt = !Comment.StopToThink();
+            //opt = SwitchAndValidate(r);
         }
     }
 
@@ -41,7 +39,7 @@ public class S_ReservaMenu
     {
         Console.Clear();
         Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Detalle Reserva                   ");
+        Console.WriteLine("                    Detalle Reservas                  ");
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
@@ -54,11 +52,30 @@ public class S_ReservaMenu
         Console.WriteLine("     Fecha Egreso: " + r.fechaEgreso);
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
+    
+    private bool SwitchAndValidate(List<Reserva> r)
+    {
+        Reserva res;
+        while (true)
+        {
+            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código de la Reserva que desea modificar: ", 0,
+                999, true);
+            res = r.FirstOrDefault(t => t.id == cod);
+            if (res != null)
+            {
+                break;
+            }
+
+            Console.WriteLine("Por favor coloque un código valido!");
+        }
+
+        return SwitchMenuReserva(ShowMenuReserva(), res);
+    }
 
     private int ShowMenuReserva()
     {
         Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Menú Reserva                   ");
+        Console.WriteLine("                    Menú Reservas                     ");
         Console.WriteLine("══════════════════════════════════════════════════════");
         Console.WriteLine("¿Qué datos le gustaría modificar?");
         Console.WriteLine("     1. Cantidad de Huespedes");

@@ -30,9 +30,8 @@ public class S_HotelMenu
                 ShowDataHotel(hotel);
             }
 
-            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
-                999, true);
-            opt = SwitchMenuHotel(ShowMenuHotel(), h.FirstOrDefault(t => t.id == cod));
+            opt = !Comment.StopToThink();
+            //opt = SwitchAndValidate(h);
         }
     }
 
@@ -52,6 +51,25 @@ public class S_HotelMenu
         Console.WriteLine("     Direccion: " + h.direccion);
         Console.WriteLine("     Comodidades: " + (h.amenities ? "Sí" : "No"));
         Console.WriteLine("══════════════════════════════════════════════════════");
+    }
+
+    private bool SwitchAndValidate(List<entity.Hotel> h)
+    {
+        entity.Hotel hot;
+        while (true)
+        {
+            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
+                999, true);
+            hot = h.FirstOrDefault(t => t.id == cod);
+            if (hot != null)
+            {
+                break;
+            }
+
+            Console.WriteLine("Por favor coloque un código valido!");
+        }
+
+        return SwitchMenuHotel(ShowMenuHotel(), hot);
     }
 
     private int ShowMenuHotel()
