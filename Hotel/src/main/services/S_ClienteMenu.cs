@@ -6,14 +6,14 @@ namespace Hotel.main.services;
 
 public class S_ClienteMenu
 {
-    public void ClienteMenu(Cliente c)
+    public void ClienteMenuModificar(Cliente c)
     {
         var opt = true;
         while (opt)
         {
             Console.Clear();
             ShowData(c);
-            opt = SwitchMenuCliente(ShowMenuCliente(), c);
+            opt = SwitchMenuModificarCliente(ShowMenuModificarCliente(), c);
         }
     }
 
@@ -22,14 +22,11 @@ public class S_ClienteMenu
         Console.WriteLine("══════════════════════════════════════════════════════");
         Console.WriteLine("                    Detalle Cliente                   ");
         Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("     DNI: " + c.dni + "\t\tNombre Completo: " + c.nombre + " " + c.apellido);
-        Console.WriteLine("     Direccion: " + c.direccion + "\t\tTelefono: " + c.telefono);
-        Console.WriteLine("     Legajo: " + c.usuario + "\t\tFecha de Nacimiento: " + c.fechaNacimiento);
-        Console.WriteLine("     Email: " + c.email);
+        Console.WriteLine(c.toReport());
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
-    private int ShowMenuCliente()
+    private int ShowMenuModificarCliente()
     {
         Console.WriteLine("══════════════════════════════════════════════════════");
         Console.WriteLine("                    Menú Cliente                   ");
@@ -44,7 +41,7 @@ public class S_ClienteMenu
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 9, true);
     }
 
-    private bool SwitchMenuCliente(int i, Cliente c)
+    private bool SwitchMenuModificarCliente(int i, Cliente c)
     {
         switch (i)
         {

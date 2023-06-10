@@ -16,6 +16,7 @@ public class Program
         Console.WriteLine("╔════════════════════════════════════════════════════╗");
         Console.WriteLine("║                  ¡ Bienvenido !                    ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
+        // Preguntar si es nuevo usuario o si es usuario ya creado.
         UploadData();
         while (true)
         {
@@ -70,7 +71,7 @@ public class Program
         switch (menu)
         {
             case 1: // Datos del Cliente
-                new S_ClienteMenu().ClienteMenu(_cliente);
+                new S_ClienteMenu().ClienteMenuModificar(_cliente);
                 break;
             case 2: // Menú de su Reserva
                 SwitchMenuReserva(MenuReserva());

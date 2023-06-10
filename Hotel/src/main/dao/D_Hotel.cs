@@ -26,7 +26,7 @@ public class D_Hotel : A_JsonConvert<entity.Hotel>, D_Factory<entity.Hotel>
 
     public ResultadoTransaccion Insert(entity.Hotel c)
     {
-        var obj = new S_Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(c);
         var json = WebHelper.Post("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -34,7 +34,7 @@ public class D_Hotel : A_JsonConvert<entity.Hotel>, D_Factory<entity.Hotel>
 
     public ResultadoTransaccion Update(entity.Hotel c)
     {
-        var obj = new S_Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(c);
         var json = WebHelper.Put("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -42,7 +42,7 @@ public class D_Hotel : A_JsonConvert<entity.Hotel>, D_Factory<entity.Hotel>
 
     public ResultadoTransaccion Delete(entity.Hotel c)
     {
-        var obj = new S_Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(c);
         var json = WebHelper.Delete("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);

@@ -27,7 +27,7 @@ public class D_Cliente : A_JsonConvert<Cliente>, D_Factory<Cliente>
 
     public ResultadoTransaccion Insert(Cliente c)
     {
-        var obj = new S_Cliente().ClienteMap(c);
+        var obj = new Cliente().ClienteMap(c);
         var json = WebHelper.Post("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -35,7 +35,7 @@ public class D_Cliente : A_JsonConvert<Cliente>, D_Factory<Cliente>
 
     public ResultadoTransaccion Update(Cliente c)
     {
-        var obj = new S_Cliente().ClienteMap(c);
+        var obj = new Cliente().ClienteMap(c);
         var json = WebHelper.Put("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -43,7 +43,7 @@ public class D_Cliente : A_JsonConvert<Cliente>, D_Factory<Cliente>
 
     public ResultadoTransaccion Delete(Cliente c)
     {
-        var obj = new S_Cliente().ClienteMap(c);
+        var obj = new Cliente().ClienteMap(c);
         var json = WebHelper.Delete("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);

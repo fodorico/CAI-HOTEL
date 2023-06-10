@@ -1,3 +1,6 @@
+using System.Collections.Specialized;
+using Hotel.main.services;
+
 namespace Hotel.main.entity;
 
 public class Hotel
@@ -9,6 +12,10 @@ public class Hotel
     public string direccion { get; set; }
     public string nombre { get; set; }
 
+    public Hotel()
+    {
+    }
+
     public Hotel(int id, int estrellas, int usuario, bool amenities, string direccion, string nombre)
     {
         this.id = id;
@@ -17,5 +24,28 @@ public class Hotel
         this.amenities = amenities;
         this.direccion = direccion;
         this.nombre = nombre;
+    }
+
+    public NameValueCollection HotelMap(entity.Hotel h)
+    {
+        var n = new NameValueCollection
+        {
+            { "id", h.id.ToString() },
+            { "Estrellas", h.estrellas.ToString() },
+            { "Usuario", h.usuario.ToString() },
+            { "Amenities", h.amenities.ToString() },
+            { "Direccion", h.direccion },
+            { "Nombre", h.nombre }
+        };
+        return n;
+    }
+
+    public string toReport()
+    {
+        return "      Código: " + id + "\n" +
+               "     Nombre: " + nombre + "\n" +
+               "     Estrellas: " + estrellas + "\n" +
+               "     Direccion: " + direccion + "\n" +
+               "     Comodidades: " + (amenities ? "Sí" : "No");
     }
 }

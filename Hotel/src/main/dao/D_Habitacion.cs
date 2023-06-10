@@ -26,7 +26,7 @@ public class D_Habitacion : A_JsonConvert<Habitacion>, D_Factory<Habitacion>
 
     public ResultadoTransaccion Insert(Habitacion c)
     {
-        var obj = new S_Habitacion().HabitacionMap(c);
+        var obj = new Habitacion().HabitacionMap(c);
         var json = WebHelper.Post("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -34,7 +34,7 @@ public class D_Habitacion : A_JsonConvert<Habitacion>, D_Factory<Habitacion>
 
     public ResultadoTransaccion Update(Habitacion c)
     {
-        var obj = new S_Habitacion().HabitacionMap(c);
+        var obj = new Habitacion().HabitacionMap(c);
         var json = WebHelper.Put("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);
@@ -42,7 +42,7 @@ public class D_Habitacion : A_JsonConvert<Habitacion>, D_Factory<Habitacion>
 
     public ResultadoTransaccion Delete(Habitacion c)
     {
-        var obj = new S_Habitacion().HabitacionMap(c);
+        var obj = new Habitacion().HabitacionMap(c);
         var json = WebHelper.Delete("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);

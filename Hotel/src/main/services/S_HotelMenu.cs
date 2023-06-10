@@ -30,8 +30,8 @@ public class S_HotelMenu
                 ShowDataHotel(hotel);
             }
 
-            opt = !Comment.StopToThink();
-            //opt = SwitchAndValidate(h);
+            Comment.StopToThink();
+            opt = SwitchAndValidate(h);
         }
     }
 
@@ -45,11 +45,7 @@ public class S_HotelMenu
 
     private static void ShowDataHotel(entity.Hotel h)
     {
-        Console.WriteLine("     Código: " + h.id);
-        Console.WriteLine("     Nombre: " + h.nombre);
-        Console.WriteLine("     Estrellas: " + h.estrellas);
-        Console.WriteLine("     Direccion: " + h.direccion);
-        Console.WriteLine("     Comodidades: " + (h.amenities ? "Sí" : "No"));
+        Console.WriteLine(h.toReport());
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 

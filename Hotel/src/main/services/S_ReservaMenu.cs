@@ -45,11 +45,7 @@ public class S_ReservaMenu
 
     private static void ShowDataReserva(Reserva r)
     {
-        Console.WriteLine("     Código: " + r.id);
-        Console.WriteLine("     Habitacion: " + r.idHabitacion);
-        Console.WriteLine("     Cantidad de Huespedes: " + r.cantidadHuespedes);
-        Console.WriteLine("     Fecha Ingreso: " + r.fechaIngreso);
-        Console.WriteLine("     Fecha Egreso: " + r.fechaEgreso);
+        Console.WriteLine(r.toReport());
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
     

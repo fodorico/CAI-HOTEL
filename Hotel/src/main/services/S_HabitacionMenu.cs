@@ -51,11 +51,7 @@ public class S_HabitacionMenu
 
     private static void ShowDataHabitacion(Habitacion h)
     {
-        Console.WriteLine("     Código: " + h.idHotel);
-        Console.WriteLine("     Cantidad Plazas: " + h.cantidadPlazas);
-        Console.WriteLine("     Categoria: " + h.categoria);
-        Console.WriteLine("     Precio: " + h.precio);
-        Console.WriteLine("     Cancelable: " + (h.cancelable ? "Sí" : "No"));
+        Console.WriteLine(h.toReport());
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
