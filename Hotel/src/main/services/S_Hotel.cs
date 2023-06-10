@@ -8,4 +8,9 @@ public class S_Hotel
     {
         return new D_Hotel().Load(id);
     }
+    
+    public List<entity.Hotel> GetHoteles()
+    {
+        return new D_Hotel().Load();
+    }
 }

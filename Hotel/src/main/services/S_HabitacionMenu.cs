@@ -21,11 +21,10 @@ public class S_HabitacionMenu
                 ShowDataHabitacion(habitacion);
             }
 
-            opt = !Comment.StopToThink();
-            //opt = SwitchAndValidate(h);
-            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
-                999, true);
-            opt = SwitchMenuHabitacion(ShowMenuHabitacion(), _habitacions.FirstOrDefault(t => t.id == cod));
+            opt = Comment.StopToThink();
+            // opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Habitación? (Si / No): ")
+            //     ? SwitchAndValidate(_habitacions)
+            //     : false;
         }
     }
 

@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Hotel.main.dao;
 using Utils;
 
@@ -6,18 +5,6 @@ namespace Hotel.main.services;
 
 public class S_HotelMenu
 {
-    public void HotelMenu(entity.Hotel h)
-    {
-        var opt = true;
-        while (opt)
-        {
-            Console.Clear();
-            ShowData();
-            ShowDataHotel(h);
-            opt = SwitchMenuHotel(ShowMenuHotel(), h);
-        }
-    }
-
     public void HotelMenu(List<entity.Hotel> h)
     {
         var opt = true;
@@ -30,8 +17,10 @@ public class S_HotelMenu
                 ShowDataHotel(hotel);
             }
 
-            Comment.StopToThink();
-            opt = SwitchAndValidate(h);
+            opt = Comment.StopToThink();
+            // opt = ValidateInput.ValidateBoolean("Desea modificar un dato de un Hotel? (Si / No): ")
+            //     ? SwitchAndValidate(h)
+            //     : false;
         }
     }
 

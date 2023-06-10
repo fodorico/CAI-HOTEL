@@ -13,7 +13,9 @@ public class S_ClienteMenu
         {
             Console.Clear();
             ShowData(c);
-            opt = SwitchMenuModificarCliente(ShowMenuModificarCliente(), c);
+            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Habitación? (Si / No): ")
+                ? SwitchMenuModificarCliente(ShowMenuModificarCliente(), c)
+                : false;
         }
     }
 

@@ -16,8 +16,15 @@ public class Program
         Console.WriteLine("╔════════════════════════════════════════════════════╗");
         Console.WriteLine("║                  ¡ Bienvenido !                    ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
-        // Preguntar si es nuevo usuario o si es usuario ya creado.
-        UploadData();
+        if (ValidateInput.ValidateBoolean("Usted es un nuevo usuario o ya está registrado? (SI / NO): "))
+        {
+            NewData();
+        }
+        else
+        {
+            UploadData();
+        }
+
         while (true)
         {
             SwitchMainMenu(Menu());
@@ -34,6 +41,13 @@ public class Program
         _hotels = new S_Hotel().GetHotelesData(_cliente.usuario);
     }
 
+    private static void NewData()
+    {
+        _cliente = new S_Cliente().SaveNewCliente();
+        _reservas = new List<Reserva>();
+        _hotels = new List<entity.Hotel>();
+    }
+
     private static int GetLegajo()
     {
         return ValidateInput.ValidateInteger("Ingrese su número de legajo: ");
@@ -46,7 +60,7 @@ public class Program
         Console.WriteLine("║                   Menú Principal                   ║");
         Console.WriteLine("╠════════════════════════════════════════════════════╣");
         Console.WriteLine("║     1. Datos del Cliente                           ║");
-        Console.WriteLine("║     2) Menú de su Reserva                          ║");
+        Console.WriteLine("║     2. Menú de su Reserva                          ║");
         Console.WriteLine("║     0. Salir                                       ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 3, true);
@@ -58,12 +72,13 @@ public class Program
         Console.WriteLine("╔════════════════════════════════════════════════════╗");
         Console.WriteLine("║                   Menú Reserva                     ║");
         Console.WriteLine("╠════════════════════════════════════════════════════╣");
-        Console.WriteLine("║     1) Datos de su Reservas                        ║");
-        Console.WriteLine("║     2) Datos de su Hoteles Reservados              ║");
-        Console.WriteLine("║     3) Datos de su Habitaciones Reservadas         ║");
+        Console.WriteLine("║     1. Crear nueva Reserva                         ║");
+        Console.WriteLine("║     2. Datos de su Reservas                        ║");
+        Console.WriteLine("║     3. Datos de su Hoteles Reservados              ║");
+        Console.WriteLine("║     4. Datos de su Habitaciones Reservadas         ║");
         Console.WriteLine("║     0. Salir                                       ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
-        return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 4, true);
+        return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 5, true);
     }
 
     private static void SwitchMainMenu(int menu)
@@ -87,15 +102,18 @@ public class Program
     {
         switch (menu)
         {
-            case 1: // Datos de sus Reservas
+            case 1: // Crear nueva Reserva
+                new S_Reserva().SaveNewReserva(_cliente);
+                break;
+            case 2: // Datos de sus Reservas
                 if (_reservas.Count > 0) new S_ReservaMenu().ReservaMenu(_reservas);
                 else Console.WriteLine("No se encuentran reservas registradas!");
                 break;
-            case 2: // Datos de sus Hoteles
+            case 3: // Datos de sus Hoteles
                 if (_hotels.Count > 0) new S_HotelMenu().HotelMenu(_hotels);
                 else Console.WriteLine("No se encuentran hoteles registrados para esa reserva");
                 break;
-            case 3: // Datos de sus Habitaciones
+            case 4: // Datos de sus Habitaciones
                 if (_hotels.Count > 0) new S_HabitacionMenu().HabitacionMenu(_hotels, _reservas);
                 else Console.WriteLine("No se encuentran hoteles registrados para esa reserva");
                 break;

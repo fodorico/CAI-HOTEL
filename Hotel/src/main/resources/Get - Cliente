@@ -1,0 +1,19 @@
+//-------------------------------------------------------\\
+/api/v1/cliente/{registro}
+[
+  {
+    "dni": 32531831,
+    "nombre": "Rodolfo",
+    "apellido": "Zavala",
+    "direccion": "Calle falsa 123",
+    "email": "mail@mail",
+    "telefono": "4444555",
+    "fechaNacimiento": "1986-07-14T00:00:00",
+    "fechaAlta": "2023-05-22T21:50:03",
+    "activo": true,
+    "usuario": "854851",
+    "host": "",
+    "id": 1
+  }
+]
+//-------------------------------------------------------\\

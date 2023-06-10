@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using Hotel.main.dao;
 using Hotel.main.entity;
 using Utils;
@@ -7,18 +6,6 @@ namespace Hotel.main.services;
 
 public class S_ReservaMenu
 {
-    public void ReservaMenu(Reserva r)
-    {
-        var opt = true;
-        while (opt)
-        {
-            Console.Clear();
-            ShowData();
-            ShowDataReserva(r);
-            opt = SwitchMenuReserva(ShowMenuReserva(), r);
-        }
-    }
-
     public void ReservaMenu(List<Reserva> r)
     {
         var opt = true;
@@ -30,8 +17,11 @@ public class S_ReservaMenu
             {
                 ShowDataReserva(reserva);
             }
-            opt = !Comment.StopToThink();
-            //opt = SwitchAndValidate(r);
+
+            Comment.StopToThink();
+            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Reserva? (Si / No): ")
+                ? SwitchAndValidate(r)
+                : false;
         }
     }
 
@@ -48,13 +38,14 @@ public class S_ReservaMenu
         Console.WriteLine(r.toReport());
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
-    
+
     private bool SwitchAndValidate(List<Reserva> r)
     {
         Reserva res;
         while (true)
         {
-            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código de la Reserva que desea modificar: ", 0,
+            var cod = ValidateInput.ValidateInteger("Por favor escriba el Código de la Reserva que desea modificar: ",
+                0,
                 999, true);
             res = r.FirstOrDefault(t => t.id == cod);
             if (res != null)
