@@ -2,30 +2,20 @@ using Hotel.main.dao;
 using Hotel.main.entity;
 using Utils;
 
-namespace Hotel.main.services;
+namespace Hotel.main.services.CustomerServices;
 
-public class S_ClienteMenu
+public class S_CustomerModify
 {
-    public void ClienteMenuModificar(Cliente c)
+    public void ModifyCustomer(entity.Customer c)
     {
         var opt = true;
         while (opt)
         {
             Console.Clear();
-            ShowData(c);
-            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Habitación? (Si / No): ")
-                ? SwitchMenuModificarCliente(ShowMenuModificarCliente(), c)
+            opt = ValidateInput.ValidateBoolean("Desea modificar un dato del Usuario? (Si / No): ")
+                ? SwitchMenuModifyCustomer(ShowMenuModificarCliente(), c)
                 : false;
         }
-    }
-
-    private void ShowData(Cliente c)
-    {
-        Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Detalle Cliente                   ");
-        Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine(c.toReport());
-        Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
     private int ShowMenuModificarCliente()
@@ -35,7 +25,7 @@ public class S_ClienteMenu
         Console.WriteLine("══════════════════════════════════════════════════════");
         Console.WriteLine("¿Qué datos le gustaría modificar?");
         Console.WriteLine("     1. DNI\t\t2. Nombre");
-        Console.WriteLine("     3. Apellido\t\t4. Dirección");
+        Console.WriteLine("     3. Apellido\t4. Dirección");
         Console.WriteLine("     5. Email\t\t6. Telefono");
         Console.WriteLine("     7. Legajo\t\t8. Fecha de Nacimiento");
         Console.WriteLine("     0. Salir");
@@ -43,50 +33,51 @@ public class S_ClienteMenu
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 9, true);
     }
 
-    private bool SwitchMenuModificarCliente(int i, Cliente c)
+    private bool SwitchMenuModifyCustomer(int i, Customer c)
     {
         switch (i)
         {
             case 1:
                 var tempDn = ValidateInput.ValidateInteger("Ingrese el nuevo DNI: ", -1, 99999999, true);
-                c.dni = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDn : c.dni;
+                c.Doc = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDn : c.Doc;
                 break;
             case 2:
                 var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
-                c.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : c.nombre;
+                c.Name = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : c.Name;
                 break;
             case 3:
                 var tempA = ValidateInput.ValidateString("Ingrese el nuevo Apellido: ", "IsLetter");
-                c.apellido = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : c.apellido;
+                c.LastName = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : c.LastName;
                 break;
             case 4:
                 var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
-                c.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : c.direccion;
+                c.Address = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : c.Address;
                 break;
             case 5:
                 var tempE = ValidateInput.ValidateString("Ingrese el nuevo Email: ");
-                c.email = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : c.email;
+                c.Email = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : c.Email;
                 break;
             case 6:
                 var tempT =
                     ValidateInput.ValidateString("Ingrese el nuevo Telefono (Sin espcios/guiones): ", "IsDigit");
-                c.telefono = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempT : c.telefono;
+                c.Phone = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempT : c.Phone;
                 break;
             case 7:
                 var tempL = ValidateInput.ValidateString("Ingrese el nuevo Legajo: ", "IsDigit");
-                c.usuario = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempL : c.usuario;
+                c.User = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempL : c.User;
                 break;
             case 8:
-                var tempFn = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Nacimiento (DD-MM-YYYY): ");
-                c.fechaNacimiento = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                var tempFn = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Nacimiento (DD-MM-YYYY): ",
+                    "superior a la Fecha de Hoy", "less", DateTime.Now);
+                c.DateBirth = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempFn
-                    : c.fechaNacimiento;
+                    : c.DateBirth;
                 break;
             default:
                 return false;
         }
 
-        new D_Cliente().Update(c);
+        new D_Customer().Update(c);
         return true;
     }
 }

@@ -1,49 +1,47 @@
 using Hotel.main.abstraction;
 using Hotel.main.entity;
-using Hotel.main.services;
 
 namespace Hotel.main.dao;
 
-public class D_Cliente : A_JsonConvert<Cliente>, D_Factory<Cliente>
+public class D_Customer : A_JsonConvert<Customer>, D_Factory<Customer>
 {
-    public List<Cliente> Load()
+    public List<Customer> Load()
     {
         var jsonClient = WebHelper.Get("cliente");
         return StringToJsonArray(jsonClient);
     }
 
-    public List<Cliente> Load(string id)
+    public List<Customer> Load(string id)
     {
         var jsonClient = WebHelper.Get("cliente/" + id);
         return StringToJsonArray(jsonClient);
     }
 
-    public Cliente Select(string id)
+    public Customer Select(string id)
     {
         var jsonClient = WebHelper.Get("cliente/" + id);
-        // TODO: NO TRAE LOS USUARIOS ACTUALIZADOS
         return StringToJsonArray(jsonClient)[0];
     }
 
-    public ResultadoTransaccion Insert(Cliente c)
+    public ResultTransaction Insert(Customer c)
     {
-        var obj = new Cliente().ClienteMap(c);
+        var obj = new Customer().CustomerMap(c);
         var json = WebHelper.Post("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Update(Cliente c)
+    public ResultTransaction Update(Customer c)
     {
-        var obj = new Cliente().ClienteMap(c);
+        var obj = new Customer().CustomerMap(c);
         var json = WebHelper.Put("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Delete(Cliente c)
+    public ResultTransaction Delete(Customer c)
     {
-        var obj = new Cliente().ClienteMap(c);
+        var obj = new Customer().CustomerMap(c);
         var json = WebHelper.Delete("cliente", obj);
 
         return StringToJsonObjectTransaccion(json);

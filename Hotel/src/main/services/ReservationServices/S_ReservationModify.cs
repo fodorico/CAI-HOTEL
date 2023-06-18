@@ -1,53 +1,33 @@
+using System.Globalization;
 using Hotel.main.dao;
 using Hotel.main.entity;
 using Utils;
 
-namespace Hotel.main.services;
+namespace Hotel.main.services.ReservationServices;
 
-public class S_ReservaMenu
+public class S_ReservationModify
 {
-    public void ReservaMenu(List<Reserva> r)
+    public void ModifyReserva(List<Reservation> r)
     {
         var opt = true;
         while (opt)
         {
             Console.Clear();
-            ShowData();
-            foreach (var reserva in r)
-            {
-                ShowDataReserva(reserva);
-            }
-
-            Comment.StopToThink();
             opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Reserva? (Si / No): ")
                 ? SwitchAndValidate(r)
                 : false;
         }
     }
 
-    private void ShowData()
+    private bool SwitchAndValidate(List<Reservation> r)
     {
-        Console.Clear();
-        Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Detalle Reservas                  ");
-        Console.WriteLine("══════════════════════════════════════════════════════");
-    }
-
-    private static void ShowDataReserva(Reserva r)
-    {
-        Console.WriteLine(r.toReport());
-        Console.WriteLine("══════════════════════════════════════════════════════");
-    }
-
-    private bool SwitchAndValidate(List<Reserva> r)
-    {
-        Reserva res;
+        Reservation res;
         while (true)
         {
             var cod = ValidateInput.ValidateInteger("Por favor escriba el Código de la Reserva que desea modificar: ",
                 0,
                 999, true);
-            res = r.FirstOrDefault(t => t.id == cod);
+            res = r.FirstOrDefault(t => t.Id == cod);
             if (res != null)
             {
                 break;
@@ -73,33 +53,35 @@ public class S_ReservaMenu
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 4, true);
     }
 
-    private bool SwitchMenuReserva(int i, Reserva r)
+    private bool SwitchMenuReserva(int i, Reservation r)
     {
         switch (i)
         {
             case 1:
                 var tempCH = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: ");
-                r.cantidadHuespedes = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                r.QuantityGuests = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempCH
-                    : r.cantidadHuespedes;
+                    : r.QuantityGuests;
                 break;
             case 2:
-                var tempFI = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Ingreso (DD-MM-YYYY): ");
-                r.fechaIngreso = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
-                    ? tempFI.ToString()
-                    : r.fechaIngreso;
+                var tempFi = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Ingreso (DD-MM-YYYY): ",
+                    "inferior a la Fecha de Hoy", "more", DateTime.Now);
+                r.DateEntry = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                    ? tempFi.ToString("d", CultureInfo.CurrentCulture)
+                    : r.DateEntry;
                 break;
             case 3:
-                var tempFE = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Egreso (DD-MM-YYYY): ");
-                r.fechaEgreso = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
-                    ? tempFE.ToString()
-                    : r.fechaEgreso;
+                var tempFe = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Egreso (DD-MM-YYYY): ",
+                    "inferior a la Fecha de Ingreso", "more", DateTime.Now);
+                r.DateEgress = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                    ? tempFe.ToString("d", CultureInfo.CurrentCulture)
+                    : r.DateEgress;
                 break;
             default:
                 return false;
         }
 
-        new D_Reserva().Update(r);
+        new D_Reservation().Update(r);
         return true;
     }
 }

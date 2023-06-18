@@ -31,11 +31,11 @@ public class A_JsonConvert<T>
         }
     }
 
-    protected ResultadoTransaccion StringToJsonObjectTransaccion(string json)
+    protected ResultTransaction StringToJsonObjectTransaccion(string json)
     {
         try
         {
-            return JsonConvert.DeserializeObject<ResultadoTransaccion>(json);
+            return JsonConvert.DeserializeObject<ResultTransaction>(json);
         }
         catch (Exception e)
         {

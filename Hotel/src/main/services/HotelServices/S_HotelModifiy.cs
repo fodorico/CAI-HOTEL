@@ -1,41 +1,20 @@
 using Hotel.main.dao;
 using Utils;
 
-namespace Hotel.main.services;
+namespace Hotel.main.services.HotelServices;
 
-public class S_HotelMenu
+public class S_HotelModifiy
 {
-    public void HotelMenu(List<entity.Hotel> h)
+    public void HotelModify(List<entity.Hotel> h)
     {
         var opt = true;
         while (opt)
         {
             Console.Clear();
-            ShowData();
-            foreach (var hotel in h)
-            {
-                ShowDataHotel(hotel);
-            }
-
-            opt = Comment.StopToThink();
-            // opt = ValidateInput.ValidateBoolean("Desea modificar un dato de un Hotel? (Si / No): ")
-            //     ? SwitchAndValidate(h)
-            //     : false;
+            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de un Hotel? (Si / No): ")
+                ? SwitchAndValidate(h)
+                : false;
         }
-    }
-
-    private void ShowData()
-    {
-        Console.Clear();
-        Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Detalle Hotel                   ");
-        Console.WriteLine("══════════════════════════════════════════════════════");
-    }
-
-    private static void ShowDataHotel(entity.Hotel h)
-    {
-        Console.WriteLine(h.toReport());
-        Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
     private bool SwitchAndValidate(List<entity.Hotel> h)
@@ -45,7 +24,7 @@ public class S_HotelMenu
         {
             var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
                 999, true);
-            hot = h.FirstOrDefault(t => t.id == cod);
+            hot = h.FirstOrDefault(t => t.Id == cod);
             if (hot != null)
             {
                 break;
@@ -78,19 +57,19 @@ public class S_HotelMenu
         {
             case 1:
                 var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
-                h.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.nombre;
+                h.Name = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.Name;
                 break;
             case 2:
                 var tempE = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Estrellas: ", -1, 6, true);
-                h.estrellas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.estrellas;
+                h.Stars = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.Stars;
                 break;
             case 3:
                 var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
-                h.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.direccion;
+                h.Address = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.Address;
                 break;
             case 4:
                 var tempA = ValidateInput.ValidateBoolean("Ingrese si tiene Comodidades (Si/No): ");
-                h.amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.amenities;
+                h.Amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.Amenities;
                 break;
             default:
                 return false;

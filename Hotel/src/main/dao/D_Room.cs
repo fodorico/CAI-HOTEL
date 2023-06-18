@@ -1,48 +1,47 @@
 using Hotel.main.abstraction;
 using Hotel.main.entity;
-using Hotel.main.services;
 
 namespace Hotel.main.dao;
 
-public class D_Habitacion : A_JsonConvert<Habitacion>, D_Factory<Habitacion>
+public class D_Room : A_JsonConvert<Room>, D_Factory<Room>
 {
-    public List<Habitacion> Load()
+    public List<Room> Load()
     {
         var jsonClient = WebHelper.Get("Hotel/Habitaciones");
         return StringToJsonArray(jsonClient);
     }
 
-    public List<Habitacion> Load(string id)
+    public List<Room> Load(string id)
     {
         var jsonClient = WebHelper.Get("Hotel/Habitaciones/" + id);
         return StringToJsonArray(jsonClient);
     }
 
-    public Habitacion Select(string id)
+    public Room Select(string id)
     {
         var jsonClient = WebHelper.Get("Hotel/Habitaciones/" + id);
         return StringToJsonObject(jsonClient);
     }
 
-    public ResultadoTransaccion Insert(Habitacion c)
+    public ResultTransaction Insert(Room r)
     {
-        var obj = new Habitacion().HabitacionMap(c);
+        var obj = new Room().HabitacionMap(r);
         var json = WebHelper.Post("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Update(Habitacion c)
+    public ResultTransaction Update(Room r)
     {
-        var obj = new Habitacion().HabitacionMap(c);
+        var obj = new Room().HabitacionMap(r);
         var json = WebHelper.Put("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Delete(Habitacion c)
+    public ResultTransaction Delete(Room r)
     {
-        var obj = new Habitacion().HabitacionMap(c);
+        var obj = new Room().HabitacionMap(r);
         var json = WebHelper.Delete("Hotel/Habitaciones", obj);
 
         return StringToJsonObjectTransaccion(json);

@@ -1,51 +1,50 @@
 using System.Collections.Specialized;
-using Hotel.main.services;
 
 namespace Hotel.main.entity;
 
 public class Hotel
 {
-    public int id { get; set; }
-    public int estrellas { get; set; }
-    public int usuario { get; set; }
-    public bool amenities { get; set; }
-    public string direccion { get; set; }
-    public string nombre { get; set; }
+    public int Id { get; set; }
+    public int Stars { get; set; }
+    public int User { get; set; }
+    public bool Amenities { get; set; }
+    public string Address { get; set; }
+    public string Name { get; set; }
 
     public Hotel()
     {
     }
 
-    public Hotel(int id, int estrellas, int usuario, bool amenities, string direccion, string nombre)
+    public Hotel(int id, int stars, int user, bool amenities, string address, string name)
     {
-        this.id = id;
-        this.estrellas = estrellas;
-        this.usuario = usuario;
-        this.amenities = amenities;
-        this.direccion = direccion;
-        this.nombre = nombre;
+        Id = id;
+        Stars = stars;
+        User = user;
+        Amenities = amenities;
+        Address = address;
+        Name = name;
     }
 
-    public NameValueCollection HotelMap(entity.Hotel h)
+    public NameValueCollection HotelMap(Hotel h)
     {
         var n = new NameValueCollection
         {
-            { "id", h.id.ToString() },
-            { "Estrellas", h.estrellas.ToString() },
-            { "Usuario", h.usuario.ToString() },
-            { "Amenities", h.amenities.ToString() },
-            { "Direccion", h.direccion },
-            { "Nombre", h.nombre }
+            { "id", h.Id.ToString() },
+            { "Estrellas", h.Stars.ToString() },
+            { "Usuario", h.User.ToString() },
+            { "Amenities", h.Amenities.ToString() },
+            { "Direccion", h.Address },
+            { "Nombre", h.Name }
         };
         return n;
     }
 
-    public string toReport()
+    public string ToReport()
     {
-        return "      Código: " + id + "\n" +
-               "     Nombre: " + nombre + "\n" +
-               "     Estrellas: " + estrellas + "\n" +
-               "     Direccion: " + direccion + "\n" +
-               "     Comodidades: " + (amenities ? "Sí" : "No");
+        return "      Código: " + Id + "\n" +
+               "     Nombre: " + Name + "\n" +
+               "     Estrellas: " + Stars + "\n" +
+               "     Direccion: " + Address + "\n" +
+               "     Comodidades: " + (Amenities ? "Sí" : "No");
     }
 }

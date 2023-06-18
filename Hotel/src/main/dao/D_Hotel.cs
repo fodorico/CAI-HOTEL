@@ -1,6 +1,5 @@
 using Hotel.main.abstraction;
 using Hotel.main.entity;
-using Hotel.main.services;
 
 namespace Hotel.main.dao;
 
@@ -24,25 +23,25 @@ public class D_Hotel : A_JsonConvert<entity.Hotel>, D_Factory<entity.Hotel>
         return StringToJsonObject(jsonClient);
     }
 
-    public ResultadoTransaccion Insert(entity.Hotel c)
+    public ResultTransaction Insert(entity.Hotel h)
     {
-        var obj = new entity.Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(h);
         var json = WebHelper.Post("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Update(entity.Hotel c)
+    public ResultTransaction Update(entity.Hotel h)
     {
-        var obj = new entity.Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(h);
         var json = WebHelper.Put("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);
     }
 
-    public ResultadoTransaccion Delete(entity.Hotel c)
+    public ResultTransaction Delete(entity.Hotel h)
     {
-        var obj = new entity.Hotel().HotelMap(c);
+        var obj = new entity.Hotel().HotelMap(h);
         var json = WebHelper.Delete("Hotel/Hoteles", obj);
 
         return StringToJsonObjectTransaccion(json);

@@ -7,7 +7,7 @@ public static class ValidateInput
     public const string ConfirmMessage = "Desea guardar este cambio? (Si / No): ";
     private const string Message = "Por favor, ingrese un valor correcto! ";
 
-    public static string ValidateString(string text, string optional = "", string[]? list = null)
+    public static string ValidateString(string text, string optional = "", string[] list = null)
     {
         while (true)
         {
@@ -19,14 +19,14 @@ public static class ValidateInput
                     (optional == "IsLetterOrDigit" && input.All(char.IsLetterOrDigit) && list == null) ||
                     (optional == "IsLetter" && input.All(char.IsLetter) && list == null) ||
                     (optional == "IsDigit" && input.All(char.IsDigit) && list == null) ||
-                    (OptionalList(input, list!))
+                    (list != null && OptionalList(input, list))
                    )
                 {
                     return input;
                 }
             }
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
@@ -51,7 +51,7 @@ public static class ValidateInput
                 }
             }
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
@@ -67,12 +67,12 @@ public static class ValidateInput
                 return result;
             }
 
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
 
-    public static DateTime ValidateDateTime(string text)
+    public static DateTime ValidateDateTime(string text, string msg, string condition, DateTime dt)
     {
         while (true)
         {
@@ -80,21 +80,22 @@ public static class ValidateInput
             var input = Console.ReadLine();
             try
             {
-                if (input != null)
+                if (!string.IsNullOrEmpty(input))
                 {
-                    var dateTime = DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.InvariantCulture);
-                    if (dateTime < DateTime.Now)
+                    var dateTime = DateTime.ParseExact(input, "dd-MM-yyyy", CultureInfo.CurrentCulture);
+                    if ((condition.ToUpper().Equals("LESS") && dateTime < dt) ||
+                        (condition.ToUpper().Equals("MORE") && dateTime > dt))
                     {
                         return dateTime;
                     }
                 }
 
-                Console.Clear();
-                Console.WriteLine(Message + "No coloque una fecha vacía, ni tampoco superior a la fecha de hoy");
+                //Console.Clear();
+                Console.WriteLine(Message + $"No coloque una fecha vacía, ni tampoco {msg}.");
             }
             catch (Exception)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine(Message + "Coloque un valor tal como se solicitó.");
             }
         }
@@ -115,7 +116,7 @@ public static class ValidateInput
             }
             catch (Exception)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine(Message + "Coloque un valor que corresponda.");
             }
         }
@@ -136,7 +137,7 @@ public static class ValidateInput
             }
             catch (Exception)
             {
-                Console.Clear();
+                //Console.Clear();
                 Console.WriteLine(Message + "Coloque un valor que corresponda.");
             }
         }
