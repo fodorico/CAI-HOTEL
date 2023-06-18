@@ -1,5 +1,5 @@
 using Hotel.main.entity;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.RoomServices;
 
@@ -27,8 +27,9 @@ public class S_RoomView
     {
         Console.Clear();
         Console.WriteLine("══════════════════════════════════════════════════════");
-        Console.WriteLine("                    Detalle Habitacion                   ");
+        Console.WriteLine("                    Detalle Habitación                ");
         Console.WriteLine("══════════════════════════════════════════════════════");
+        Console.WriteLine("Aguarde, se está cargando la información.");
     }
 
     public void ShowDataRoom(Room h)

@@ -1,6 +1,6 @@
 using Hotel.main.dao;
 using Hotel.main.entity;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.CustomerServices;
 
@@ -15,8 +15,8 @@ public class S_CustomerCreate
             ValidateInput.ValidateInteger("Ingrese el nuevo DNI: ", -1, 99999999, true),
             ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter"),
             ValidateInput.ValidateString("Ingrese el nuevo Apellido: ", "IsLetter"),
-            ValidateInput.ValidateString("Ingrese la nueva Dirección: ", "All"),
-            ValidateInput.ValidateString("Ingrese el nuevo Email: ", "All"),
+            ValidateInput.ValidateString("Ingrese la nueva Dirección: "),
+            ValidateInput.ValidateString("Ingrese el nuevo Email: "),
             ValidateInput.ValidateString("Ingrese el nuevo Telefono (Sin espcios/guiones): ", "IsDigit"),
             ValidateInput.ValidateString("Ingrese el nuevo Legajo: ", "IsDigit"),
             ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Nacimiento (DD-MM-YYYY): ",

@@ -1,24 +1,17 @@
 using Hotel.main.dao;
 using Hotel.main.entity;
 using Hotel.main.services.HotelServices;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.RoomServices;
 
 public class S_Room
 {
-    public List<Room> GetRoomData(string id)
+    private List<Room> GetRoomData(string id)
     {
         return new D_Room().Load(id);
     }
-
-    public List<entity.Hotel> GetHotel()
-    {
-        var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
-            999, true);
-        return new S_Hotel().GetHotelesData(cod.ToString());
-    }
-
+    
     public List<Room> GetLastIdRoom(int idHotel)
     {
         var lr = new S_Room().GetRoomData(idHotel.ToString());
@@ -36,12 +29,11 @@ public class S_Room
 
     public Room SelectIdRoom()
     {
-        var hotels = ShowHotelsToSelect();
         var result = new Room();
         var express = true;
         while (express)
         {
-            result = GetRoomSelected(GetHotelSelected(hotels.Item1, hotels.Item2));
+            result = GetRoomSelected(new S_Hotel().SelectIdHotel());
             if (!string.IsNullOrEmpty(result.categoria))
             {
                 express = false;
@@ -49,42 +41,6 @@ public class S_Room
         }
 
         return result;
-    }
-
-    private (List<entity.Hotel>, int) ShowHotelsToSelect()
-    {
-        var lh = new S_Hotel().GetAllHoteles();
-        var max = 0;
-        Console.WriteLine("══════════════════════════════════════════════════════");
-        foreach (var h in lh)
-        {
-            max = max > h.id ? max : h.id;
-            new S_HotelView().ShowDataHotel(h);
-        }
-
-        return (lh, max);
-    }
-
-    private static entity.Hotel GetHotelSelected(List<entity.Hotel> lh, int max)
-    {
-        var hotelSelected = new entity.Hotel();
-        var ops = true;
-        while (ops)
-        {
-            var hId = ValidateInput.ValidateInteger("Coloque el Código del Hotel deseado: ", -1, max + 1, true);
-            foreach (var h in lh.Where(h => h.id == hId))
-            {
-                hotelSelected = h;
-                ops = false;
-            }
-
-            if (ops)
-            {
-                Console.WriteLine("Coloque un Código de Hotel correcto y existente");
-            }
-        }
-
-        return hotelSelected;
     }
 
     private Room GetRoomSelected(entity.Hotel hotel)

@@ -1,5 +1,5 @@
 using Hotel.main.dao;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.HotelServices;
 

@@ -9,6 +9,10 @@ public class Customer : A_Person
     public Customer()
     {
     }
+    public Customer(string user)
+    {
+        usuario = user;
+    }
 
     public Customer(int id, int doc, string name, string lastName, string address, string email,
         string phone, string user, DateTime dateBirth, DateTime entryDate, bool active)

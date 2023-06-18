@@ -1,13 +1,13 @@
 ﻿using System.Globalization;
 
-namespace Utils;
+namespace Hotel.main.utils;
 
 public static class ValidateInput
 {
     public const string ConfirmMessage = "Desea guardar este cambio? (Si / No): ";
     private const string Message = "Por favor, ingrese un valor correcto! ";
 
-    public static string ValidateString(string text, string optional = "", string[] list = null)
+    public static string ValidateString(string text, string optional = "All", string[] list = null)
     {
         while (true)
         {
@@ -15,7 +15,7 @@ public static class ValidateInput
             var input = Console.ReadLine();
             if (input != null && input.Trim().Length > 0)
             {
-                if ((optional.Length > 0 && list == null) ||
+                if ((optional == "All" && list == null) ||
                     (optional == "IsLetterOrDigit" && input.All(char.IsLetterOrDigit) && list == null) ||
                     (optional == "IsLetter" && input.All(char.IsLetter) && list == null) ||
                     (optional == "IsDigit" && input.All(char.IsDigit) && list == null) ||

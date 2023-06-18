@@ -1,6 +1,6 @@
 using Hotel.main.dao;
 using Hotel.main.entity;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.HotelServices;
 
@@ -14,8 +14,8 @@ public class S_HotelCreate
             nextId,
             ValidateInput.ValidateInteger("Ingrese el numero de estrellas: ", 0, 6, true),
             int.Parse(c.usuario),
-            ValidateInput.ValidateBoolean("Tiene Comodidades? (SI / NO): "),
-            ValidateInput.ValidateString("Ingrese la Dirección: ", "All"),
+            ValidateInput.ValidateBoolean("Tiene Comodidades? (Si / No): "),
+            ValidateInput.ValidateString("Ingrese la Dirección: "),
             ValidateInput.ValidateString("Ingrese el Nombre: ", "IsLetter")
         );
         if (ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI")

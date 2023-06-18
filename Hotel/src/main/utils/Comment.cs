@@ -1,10 +1,11 @@
-namespace Utils;
+namespace Hotel.main.utils;
 
 public static class Comment
 {
-    public static bool StopToThink()
+    private const string WaitMessage = "Si desea continuar toque una tecla....";
+    public static bool StopToThink(string text = WaitMessage)
     {
-        Console.WriteLine("Si desea contunuar toque una tecla....");
+        Console.WriteLine(text);
         Console.ReadKey();
         return true;
     }

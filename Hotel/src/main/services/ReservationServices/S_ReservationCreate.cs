@@ -3,7 +3,7 @@ using Hotel.main.dao;
 using Hotel.main.entity;
 using Hotel.main.services.CustomerServices;
 using Hotel.main.services.RoomServices;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.ReservationServices;
 
@@ -16,14 +16,32 @@ public class S_ReservationCreate
         var tempFi = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Ingreso (DD-MM-YYYY): ",
             "inferior a la Fecha de Hoy", "more", DateTime.Now);
         var tempFe = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Egreso (DD-MM-YYYY): ",
-            "inferior a la Fecha de Ingreso", "more", tempFi).ToString("d", CultureInfo.CurrentCulture);
+            "inferior a la Fecha de Ingreso", "more", tempFi).ToString("yyyy-MM-ddTHH:mm:ss");
+        var tempQg = 0;
+        do
+        {
+            tempQg = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: ");
+        } while (ValidateInput.Confirm("Es la cantidad de Huespedes correcta? (Si / No): ") != "SI");
+
+        var room = new S_Room().SelectIdRoom();
+        if (tempQg > room.cantidadPlazas)
+            
+        {
+            Console.Clear();
+            Console.WriteLine("══════════════════════════════════════════════════════");
+            Console.WriteLine("Seleccionó una Habitación con una capacidad menor a lo solicitado. Se anula la reserva.");
+            Comment.StopToThink("Para continuar toque una tecla...." +
+                                "\n══════════════════════════════════════════════════════");
+            return new Reservation();
+        }
+
         var newReservation = new Reservation(
             nextId,
-            int.Parse(new S_Customer().SelectCustomer().usuario),
-            ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: "),
+            int.Parse(c.usuario),
+            tempQg,
             c.id,
-            new S_Room().SelectIdRoom().id,
-            tempFi.ToString("d", CultureInfo.CurrentCulture),
+            room.id,
+            tempFi.ToString("yyyy-MM-ddTHH:mm:ss"),
             tempFe
         );
         if (ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI")

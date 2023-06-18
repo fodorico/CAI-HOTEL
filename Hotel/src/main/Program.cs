@@ -3,13 +3,14 @@ using Hotel.main.services.CustomerServices;
 using Hotel.main.services.HotelServices;
 using Hotel.main.services.ReservationServices;
 using Hotel.main.services.RoomServices;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main;
 
 public static class Program
 {
     private static Customer _customer = new();
+    private static Customer _client = new();
     private static List<entity.Hotel> _hotels = new();
     private static List<Reservation> _reservation = new();
 
@@ -25,9 +26,11 @@ public static class Program
         // }
         // else
         // {
-        UploadData();
+        Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
+        GetData();
+        Console.WriteLine("Legajo Sugerido de Usuario: 888086");
         // }
-
+        UploadData();
         while (true)
         {
             SwitchMenu(MenuMain(), MenuOptions());
@@ -38,20 +41,29 @@ public static class Program
     private static void NewData()
     {
         _customer = new S_CustomerCreate().NewCustomer();
-        _reservation = new List<Reservation>();
-        _hotels = new List<entity.Hotel>();
+    }
+
+    private static void GetData()
+    {
+        _customer = new S_Customer().SelectCustomer("Ingrese su número de legajo: ");
     }
 
     private static void UploadData()
     {
-        _customer = new S_Customer().GetCustomerData(GetRecord());
-        _reservation = new S_Reservation().GetReservationsData(new S_Customer().SelectCustomer().usuario);
-        _hotels = new S_Hotel().GetHotelesData(new S_Customer().SelectCustomer().usuario);
+        _client = new S_Customer().SelectCustomer("Ingrese el Legajo del Usuario a tratar: ");
+        if (_client.usuario == "888086")
+        {
+            _client = _customer;
+            _client.usuario = "888086";
+        }
+
+        _reservation = new S_Reservation().GetReservationsData(_client.usuario);
+        _hotels = new S_Hotel().GetHotelesData(_client.usuario);
     }
 
-    private static int GetRecord()
+    private static int GetRecord(string text)
     {
-        return ValidateInput.ValidateInteger("Ingrese su número de legajo: ");
+        return ValidateInput.ValidateInteger(text);
     }
 
     private static int MenuMain()
@@ -115,13 +127,18 @@ public static class Program
                 new S_CustomerCreate().NewCustomer();
                 break;
             case 2: // Reserva
-                _reservation.Add(new S_ReservationCreate().NewReservation(_customer));
+                var r = new S_ReservationCreate().NewReservation(_client);
+                if (!string.IsNullOrEmpty(r.fechaEgreso))
+                {
+                    _reservation.Add(r);
+                }
+
                 break;
             case 3: // Hotel
                 new S_HotelCreate().NewHotel(_customer);
                 break;
             case 4: // Habitacion
-                // TODO: Falta crear Habitaciones
+                new S_RoomCreate().NewHotel(_customer);
                 break;
             default: // Salir
                 Console.Clear();
@@ -134,7 +151,7 @@ public static class Program
         switch (ops)
         {
             case 1: // Usuario
-                new S_CustomerView().ViewCustomer(_customer);
+                new S_CustomerView().ViewCustomer(_client);
                 break;
             case 2: // Reserva
                 new S_ReservationView().ViewReservation(_reservation);
@@ -156,16 +173,20 @@ public static class Program
         switch (ops)
         {
             case 1: // Usuario
-                new S_CustomerModify().ModifyCustomer(_customer);
+                new S_CustomerModify().ModifyCustomer(_client);
                 break;
             case 2: // Reserva
-                new S_ReservationModify().ModifyReservation(_reservation);
+                if (_reservation.Count > 0) new S_ReservationModify().ModifyReservation(_reservation);
+                else Console.WriteLine("No se encuentran reservas registradas!");
                 break;
             case 3: // Hotel
-                new S_HotelModifiy().HotelModify(_hotels);
+                if (_hotels.Count > 0) new S_HotelModifiy().HotelModify(_hotels);
+                else Console.WriteLine("No se encuentran hoteles registrados para a su usuario");
                 break;
-            case 4: // Habitacion
-                new S_RoomModify().RoomMenuModify(_hotels, _reservation);
+            case 4: // 
+                if (_hotels.Count > 0) new S_RoomModify().RoomMenuModify(_hotels, _reservation);
+                else Console.WriteLine("No se encuentran hoteles registrados para a su usuario");
+
                 break;
             default: // Salir
                 Console.Clear();
@@ -179,7 +200,7 @@ public static class Program
         switch (ops)
         {
             case 1: // Usuario
-                new S_CustomerDelete().DeleteCustomerData(_customer);
+                new S_CustomerDelete().DeleteCustomerData(_client);
                 break;
             case 2: // Reserva
                 new S_ReservationDelete().DeleteReservationsData(_reservation[0]);

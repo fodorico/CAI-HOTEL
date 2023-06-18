@@ -1,36 +1,43 @@
 using Hotel.main.dao;
 using Hotel.main.entity;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.CustomerServices;
 
 public class S_Customer
 {
-    public Customer GetCustomerData(int id)
+    public Customer SelectCustomer(string text)
     {
-        return new D_Customer().Select(id.ToString());
+        var result = new List<Customer>();
+        while (true)
+        {
+            var i = ValidateInput.ValidateInteger(text);
+            result = new S_Customer().GetCustomerData(i);
+            if (result.Any())
+            {
+                break;
+            }
+
+            Console.WriteLine("El Legajo no pertenece a un Usuario existente");
+        }
+
+        return result[0];
+    }
+
+    private List<Customer> GetCustomerData(int id)
+    {
+        var result = new D_Customer().Load(id.ToString());
+        if (!result.Any() && id == 888086)
+        {
+            result.Add(new Customer("888086"));
+        }
+
+        return result;
     }
 
     public List<Customer> GetAllCustomer()
     {
         var lc = new D_Customer().Load();
         return lc.OrderByDescending(o => o.id).ToList();
-    }
-
-    public Customer SelectCustomer()
-    {
-        var result = new Customer();
-        while (true)
-        {
-            var i = ValidateInput.ValidateInteger("Ingrese el numero de Legajo del Usuario existente: ");
-            result = new S_Customer().GetCustomerData(i);
-            if (!string.IsNullOrEmpty(result.usuario))
-            {
-                break;
-            }
-            Console.WriteLine("Ingrese un Legajo existente");
-        }
-
-        return result;
     }
 }

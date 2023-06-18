@@ -1,6 +1,6 @@
 using Hotel.main.dao;
 using Hotel.main.entity;
-using Utils;
+using Hotel.main.utils;
 
 namespace Hotel.main.services.CustomerServices;
 
