@@ -4,13 +4,13 @@ namespace Hotel.main.entity;
 
 public class Reservation
 {
-    public int Id { get; set; }
-    public int User { get; set; }
-    public int QuantityGuests { get; set; }
-    public int IdCustomer { get; set; }
-    public int IdRoom { get; set; }
-    public string DateEntry { get; set; }
-    public string DateEgress { get; set; }
+    public int id { get; set; }
+    public int usuario { get; set; }
+    public int cantidadHuespedes { get; set; }
+    public int idCliente { get; set; }
+    public int idHabitacion { get; set; }
+    public string fechaIngreso { get; set; }
+    public string fechaEgreso { get; set; }
 
     public Reservation()
     {
@@ -19,36 +19,36 @@ public class Reservation
     public Reservation(int id, int user, int quantityGuests, int idCustomer, int idRoom,
         string dateEntry, string dateEgress)
     {
-        Id = id;
-        User = user;
-        QuantityGuests = quantityGuests;
-        IdCustomer = idCustomer;
-        IdRoom = idRoom;
-        DateEntry = dateEntry;
-        DateEgress = dateEgress;
+        this.id = id;
+        usuario = user;
+        cantidadHuespedes = quantityGuests;
+        idCliente = idCustomer;
+        idHabitacion = idRoom;
+        fechaIngreso = dateEntry;
+        fechaEgreso = dateEgress;
     }
 
     public NameValueCollection ReservaMap(Reservation r)
     {
         var n = new NameValueCollection
         {
-            { "id", r.Id.ToString() },
-            { "idHabitacion", r.IdRoom.ToString() },
-            { "idCliente", r.IdCustomer.ToString() },
-            { "cantidadHuespedes", r.QuantityGuests.ToString() },
-            { "fechaIngreso", r.DateEntry },
-            { "fechaEgreso", r.DateEgress },
-            { "usuario", r.User.ToString() }
+            { "id", r.id.ToString() },
+            { "idHabitacion", r.idHabitacion.ToString() },
+            { "idCliente", r.idCliente.ToString() },
+            { "cantidadHuespedes", r.cantidadHuespedes.ToString() },
+            { "fechaIngreso", r.fechaIngreso },
+            { "fechaEgreso", r.fechaEgreso },
+            { "usuario", r.usuario.ToString() }
         };
         return n;
     }
 
     public string ToReport()
     {
-        return "     Código: " + Id + "\n" +
-               "     Habitacion: " + IdRoom + "\n" +
-               "     Cantidad de Huespedes: " + QuantityGuests + "\n" +
-               "     Fecha Ingreso: " + utils.Utils.DateTimeFormatter(DateEntry) + "\n" +
-               "     Fecha Egreso: " + utils.Utils.DateTimeFormatter(DateEgress);
+        return "     Código: " + id + "\n" +
+               "     Habitacion: " + idHabitacion + "\n" +
+               "     Cantidad de Huespedes: " + cantidadHuespedes + "\n" +
+               "     Fecha Ingreso: " + utils.Utils.DateTimeFormatter(fechaIngreso) + "\n" +
+               "     Fecha Egreso: " + utils.Utils.DateTimeFormatter(fechaEgreso);
     }
 }

@@ -10,8 +10,8 @@ public class S_CustomerCreate
     public Customer NewCustomer()
     {
         Console.Clear();
-        var nextId = new S_Customer().GetAllCustomer()[0].Id + 1;
-        var newCustomer = new entity.Customer(
+        var nextId = new S_Customer().GetAllCustomer()[0].id + 1;
+        var newCustomer = new Customer(
             nextId,
             ValidateInput.ValidateInteger("Ingrese el nuevo DNI: ", -1, 99999999, true),
             ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter"),

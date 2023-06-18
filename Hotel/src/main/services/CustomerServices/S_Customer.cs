@@ -13,6 +13,6 @@ public class S_Customer
     public List<Customer> GetAllCustomer()
     {
         var lc = new D_Customer().Load();
-        return lc.OrderByDescending(o => o.Id).ToList();
+        return lc.OrderByDescending(o => o.id).ToList();
     }
 }

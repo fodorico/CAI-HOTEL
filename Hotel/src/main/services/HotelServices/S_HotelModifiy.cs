@@ -11,9 +11,7 @@ public class S_HotelModifiy
         while (opt)
         {
             Console.Clear();
-            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de un Hotel? (Si / No): ")
-                ? SwitchAndValidate(h)
-                : false;
+            opt = SwitchAndValidate(h);
         }
     }
 
@@ -24,7 +22,7 @@ public class S_HotelModifiy
         {
             var cod = ValidateInput.ValidateInteger("Por favor escriba el Código del Hotel que desea modificar: ", 0,
                 999, true);
-            hot = h.FirstOrDefault(t => t.Id == cod);
+            hot = h.FirstOrDefault(t => t.id == cod);
             if (hot != null)
             {
                 break;
@@ -57,19 +55,19 @@ public class S_HotelModifiy
         {
             case 1:
                 var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
-                h.Name = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.Name;
+                h.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.nombre;
                 break;
             case 2:
                 var tempE = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Estrellas: ", -1, 6, true);
-                h.Stars = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.Stars;
+                h.estrellas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.estrellas;
                 break;
             case 3:
                 var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
-                h.Address = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.Address;
+                h.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.direccion;
                 break;
             case 4:
                 var tempA = ValidateInput.ValidateBoolean("Ingrese si tiene Comodidades (Si/No): ");
-                h.Amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.Amenities;
+                h.amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.amenities;
                 break;
             default:
                 return false;

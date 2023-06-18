@@ -13,6 +13,6 @@ public class S_Reservation
     public List<Reservation> GetAllReservation()
     {
         var lr = new D_Reservation().Load();
-        return lr.OrderByDescending(o => o.Id).ToList();
+        return lr.OrderByDescending(o => o.id).ToList();
     }
 }

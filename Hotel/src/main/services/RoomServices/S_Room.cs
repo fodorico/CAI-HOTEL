@@ -13,7 +13,7 @@ public class S_Room
     public List<Room> GetSpecificRooms(List<entity.Hotel> hotels, List<Reservation> reservations)
     {
         var listRooms = new List<int>();
-        listRooms.AddRange(reservations.Select(r => r.IdRoom));
+        listRooms.AddRange(reservations.Select(r => r.idHabitacion));
 
         // foreach (var ra in hotels.Select(h => new S_Room().GetRoomData(h.Id.ToString())).SelectMany(temp =>
         //              from ha in temp
@@ -24,8 +24,8 @@ public class S_Room
         //     result.Add(ra);
         // }
 
-        return hotels.Select(h => new S_Room().GetRoomData(h.Id.ToString())).SelectMany(temp =>
-                from ha in temp let temp2 = listRooms.FirstOrDefault(t => t == ha.Id) where temp2 != null select ha)
+        return hotels.Select(h => new S_Room().GetRoomData(h.id.ToString())).SelectMany(temp =>
+                from ha in temp let temp2 = listRooms.FirstOrDefault(t => t == ha.id) where temp2 != null select ha)
             .ToList();
     }
 

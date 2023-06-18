@@ -4,52 +4,52 @@ namespace Hotel.main.entity;
 
 public class Customer : A_Person
 {
-    public int Id { get; set; }
+    public int id { get; set; }
 
     public Customer()
     {
     }
 
-    public Customer(int id, int doc, string name, string lastName, string address, string email,
-        string phone, string user, DateTime dateBirth, DateTime entryDate, bool active)
+    public Customer(int id, int dni, string nombre, string apellido, string direccion, string email,
+        string telefono, string usuario, DateTime fechaNacimiento, DateTime fechaAlta, bool activo)
     {
-        Id = id;
-        Doc = doc;
-        Name = name;
-        LastName = lastName;
-        Address = address;
-        Email = email;
-        Phone = phone;
-        User = user;
-        DateBirth = dateBirth;
-        EntryDate = entryDate;
-        Active = active;
+        this.id = id;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.usuario = usuario;
+        this.fechaNacimiento = fechaNacimiento;
+        this.fechaAlta = fechaAlta;
+        this.activo = activo;
     }
 
     public NameValueCollection CustomerMap(Customer c)
     {
         var n = new NameValueCollection
         {
-            { "id", c.Id.ToString() },
-            { "Nombre", c.Name },
-            { "Apellido", c.LastName },
-            { "Direccion", c.Address },
-            { "Telefono", c.Phone },
-            { "Email", c.Email },
-            { "DNI", c.Doc.ToString() },
-            { "Activo", c.Active.ToString() },
-            { "FechaNacimiento", c.DateBirth.ToString("yyyy-MM-dd") },
-            { "Usuario", c.User }
+            { "id", c.id.ToString() },
+            { "Nombre", c.nombre },
+            { "Apellido", c.apellido },
+            { "Direccion", c.direccion },
+            { "Telefono", c.telefono },
+            { "Email", c.email },
+            { "DNI", c.dni.ToString() },
+            { "Activo", c.activo.ToString() },
+            { "FechaNacimiento", c.fechaNacimiento.ToString("yyyy-MM-dd") },
+            { "Usuario", c.usuario }
         };
         return n;
     }
 
     public string ToReport()
     {
-        return "     DNI: " + Doc + "\t\tNombre Completo: " + GetFullName() + "\n" +
-               "     Telefono: " + Phone + "\tDireccion: " + Address + "\n" +
-               "     Legajo: " + User + "\t\tFecha de Nacimiento: " +
-               utils.Utils.DateTimeFormatter(DateBirth) + "\n" +
-               "     Email: " + Email;
+        return "     DNI: " + dni + "\t\tNombre Completo: " + GetFullName() + "\n" +
+               "     Telefono: " + telefono + "\tDireccion: " + direccion + "\n" +
+               "     Legajo: " + usuario + "\t\tFecha de Nacimiento: " +
+               utils.Utils.DateTimeFormatter(fechaNacimiento) + "\n" +
+               "     Email: " + email;
     }
 }

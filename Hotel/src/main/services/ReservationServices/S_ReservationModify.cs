@@ -13,9 +13,7 @@ public class S_ReservationModify
         while (opt)
         {
             Console.Clear();
-            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Reserva? (Si / No): ")
-                ? SwitchAndValidate(r)
-                : false;
+            opt = SwitchAndValidate(r);
         }
     }
 
@@ -27,7 +25,7 @@ public class S_ReservationModify
             var cod = ValidateInput.ValidateInteger("Por favor escriba el Código de la Reserva que desea modificar: ",
                 0,
                 999, true);
-            res = r.FirstOrDefault(t => t.Id == cod);
+            res = r.FirstOrDefault(t => t.id == cod);
             if (res != null)
             {
                 break;
@@ -59,23 +57,23 @@ public class S_ReservationModify
         {
             case 1:
                 var tempCH = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: ");
-                r.QuantityGuests = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                r.cantidadHuespedes = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempCH
-                    : r.QuantityGuests;
+                    : r.cantidadHuespedes;
                 break;
             case 2:
                 var tempFi = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Ingreso (DD-MM-YYYY): ",
                     "inferior a la Fecha de Hoy", "more", DateTime.Now);
-                r.DateEntry = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                r.fechaIngreso = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempFi.ToString("d", CultureInfo.CurrentCulture)
-                    : r.DateEntry;
+                    : r.fechaIngreso;
                 break;
             case 3:
                 var tempFe = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Egreso (DD-MM-YYYY): ",
                     "inferior a la Fecha de Ingreso", "more", DateTime.Now);
-                r.DateEgress = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                r.fechaEgreso = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempFe.ToString("d", CultureInfo.CurrentCulture)
-                    : r.DateEgress;
+                    : r.fechaEgreso;
                 break;
             default:
                 return false;

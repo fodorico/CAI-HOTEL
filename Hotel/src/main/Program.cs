@@ -1,5 +1,4 @@
 using Hotel.main.entity;
-using Hotel.main.services;
 using Hotel.main.services.CustomerServices;
 using Hotel.main.services.HotelServices;
 using Hotel.main.services.ReservationServices;
@@ -8,11 +7,11 @@ using Utils;
 
 namespace Hotel.main;
 
-public class Program
+public static class Program
 {
-    private static Customer _customer;
-    private static List<entity.Hotel> _hotels;
-    private static List<Reservation> _reservation;
+    private static Customer _customer = new();
+    private static List<entity.Hotel> _hotels = new();
+    private static List<Reservation> _reservation = new();
 
     public static void Main()
     {
@@ -36,15 +35,6 @@ public class Program
         }
     }
 
-    private static void UploadData()
-    {
-        // _cliente = new S_Cliente().GetClientData(GetLegajo());
-        _customer = new S_Customer().GetCustomerData(882831);
-        _customer.User = "888086";
-        _reservation = new S_Reservation().GetReservationsData(_customer.User);
-        _hotels = new S_Hotel().GetHotelesData(_customer.User);
-    }
-
     private static void NewData()
     {
         _customer = new S_CustomerCreate().NewCustomer();
@@ -52,7 +42,16 @@ public class Program
         _hotels = new List<entity.Hotel>();
     }
 
-    private static int GetLegajo()
+    private static void UploadData()
+    {
+        // _customer = new S_Customer().GetCustomerData(GetRecord());
+        _customer = new S_Customer().GetCustomerData(882831);
+        _customer.usuario = "888086";
+        _reservation = new S_Reservation().GetReservationsData(_customer.usuario);
+        _hotels = new S_Hotel().GetHotelesData(_customer.usuario);
+    }
+
+    private static int GetRecord()
     {
         return ValidateInput.ValidateInteger("Ingrese su número de legajo: ");
     }
@@ -146,7 +145,7 @@ public class Program
                 new S_HotelView().HotelView(_hotels);
                 break;
             case 4: // Habitacion
-                new S_RoomView().ViewRoom(_hotels,_reservation);
+                new S_RoomView().ViewRoom(_hotels, _reservation);
                 break;
             default: // Salir
                 Console.Clear();

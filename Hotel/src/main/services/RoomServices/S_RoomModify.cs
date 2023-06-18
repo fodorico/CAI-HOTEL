@@ -12,9 +12,7 @@ public class S_RoomModify
         while (opt)
         {
             Console.Clear();
-            opt = ValidateInput.ValidateBoolean("Desea modificar un dato de una Habitación? (Si / No): ")
-                ? SwitchAndValidate(new S_Room().GetSpecificRooms(h, r))
-                : false;
+            opt = SwitchAndValidate(new S_Room().GetSpecificRooms(h, r));
         }
     }
 
@@ -27,7 +25,7 @@ public class S_RoomModify
             var cod = ValidateInput.ValidateInteger(
                 "Por favor escriba el Código de la Habitacion que desea modificar: ", 0,
                 999, true);
-            hab = h.FirstOrDefault(t => t.Id == cod);
+            hab = h.FirstOrDefault(t => t.id == cod);
             if (hab != null)
             {
                 break;
@@ -60,21 +58,21 @@ public class S_RoomModify
         {
             case 1:
                 var tempCP = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Plazas: ");
-                r.QuantitySpaces = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                r.cantidadPlazas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempCP
-                    : r.QuantitySpaces;
+                    : r.cantidadPlazas;
                 break;
             case 2:
                 var tempC = ValidateInput.ValidateString("Ingrese la nueva Categoria: ", "IsLetter");
-                r.Category = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempC : r.Category;
+                r.categoria = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempC : r.categoria;
                 break;
             case 3:
                 var tempP = ValidateInput.ValidateInteger("Ingrese el nuevo Precio: ");
-                r.Price = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempP : r.Price;
+                r.precio = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempP : r.precio;
                 break;
             case 4:
                 var tempA = ValidateInput.ValidateBoolean("Ingrese si es Cancelable (Si/No): ");
-                r.Cancelable = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : r.Cancelable;
+                r.cancelable = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : r.cancelable;
                 break;
             default:
                 return false;

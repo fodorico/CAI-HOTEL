@@ -11,16 +11,16 @@ public class S_ReservationCreate
     public Reservation NewReservation(Customer c)
     {
         Console.Clear();
-        var nextId = new S_Reservation().GetAllReservation()[0].Id + 1;
+        var nextId = new S_Reservation().GetAllReservation()[0].id + 1;
         var tempFi = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Ingreso (DD-MM-YYYY): ",
             "inferior a la Fecha de Hoy", "more", DateTime.Now);
         var tempFe = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Egreso (DD-MM-YYYY): ",
             "inferior a la Fecha de Ingreso", "more", tempFi).ToString("d", CultureInfo.CurrentCulture);
         var newReservation = new Reservation(
             nextId,
-            int.Parse(c.User),
+            int.Parse(c.usuario),
             ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: "),
-            c.Id,
+            c.id,
             new S_Room().SelectIdRoom(),
             tempFi.ToString("d", CultureInfo.CurrentCulture),
             tempFe

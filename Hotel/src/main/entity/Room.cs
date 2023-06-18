@@ -4,13 +4,13 @@ namespace Hotel.main.entity;
 
 public class Room
 {
-    public int Id { get; set; }
-    public int IdHotel { get; set; }
-    public int QuantitySpaces { get; set; }
-    public int Price { get; set; }
-    public int User { get; set; }
-    public string Category { get; set; }
-    public bool Cancelable { get; set; }
+    public int id { get; set; }
+    public int idHotel { get; set; }
+    public int cantidadPlazas { get; set; }
+    public int precio { get; set; }
+    public int usuario { get; set; }
+    public string categoria { get; set; }
+    public bool cancelable { get; set; }
 
     public Room()
     {
@@ -19,26 +19,26 @@ public class Room
     public Room(int id, int idHotel, int quantitySpaces, int price, int user, string category,
         bool cancelable)
     {
-        Id = id;
-        IdHotel = idHotel;
-        QuantitySpaces = quantitySpaces;
-        Price = price;
-        User = user;
-        Category = category;
-        Cancelable = cancelable;
+        this.id = id;
+        this.idHotel = idHotel;
+        cantidadPlazas = quantitySpaces;
+        precio = price;
+        usuario = user;
+        categoria = category;
+        this.cancelable = cancelable;
     }
 
     public NameValueCollection HabitacionMap(Room h)
     {
         var n = new NameValueCollection
         {
-            { "id", h.Id.ToString() },
-            { "idHotel", h.IdHotel.ToString() },
-            { "cantidadPlazas", h.QuantitySpaces.ToString() },
-            { "categoria", h.Category },
-            { "precio", h.Price.ToString() },
-            { "cancelable", h.Cancelable.ToString() },
-            { "usuario", h.User.ToString() }
+            { "id", h.id.ToString() },
+            { "idHotel", h.idHotel.ToString() },
+            { "cantidadPlazas", h.cantidadPlazas.ToString() },
+            { "categoria", h.categoria },
+            { "precio", h.precio.ToString() },
+            { "cancelable", h.cancelable.ToString() },
+            { "usuario", h.usuario.ToString() }
         };
         return n;
     }
@@ -46,10 +46,10 @@ public class Room
     public string ToReport()
     {
         return
-            "     Código: " + IdHotel + "\n" +
-            "     Cantidad Plazas: " + QuantitySpaces + "\n" +
-            "     Categoria: " + Category + "\n" +
-            "     Precio: " + Price + "\n" +
-            "     Cancelable: " + (Cancelable ? "Sí" : "No");
+            "     Código: " + idHotel + "\n" +
+            "     Cantidad Plazas: " + cantidadPlazas + "\n" +
+            "     Categoria: " + categoria + "\n" +
+            "     Precio: " + precio + "\n" +
+            "     Cancelable: " + (cancelable ? "Sí" : "No");
     }
 }

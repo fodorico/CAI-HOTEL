@@ -12,6 +12,6 @@ public class S_Hotel
     public List<entity.Hotel> GetAllHoteles()
     {
         var lh = new D_Hotel().Load();
-        return lh.OrderByDescending(o => o.Id).ToList();
+        return lh.OrderByDescending(o => o.id).ToList();
     }
 }

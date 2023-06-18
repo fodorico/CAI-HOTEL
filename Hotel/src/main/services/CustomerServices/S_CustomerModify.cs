@@ -12,9 +12,7 @@ public class S_CustomerModify
         while (opt)
         {
             Console.Clear();
-            opt = ValidateInput.ValidateBoolean("Desea modificar un dato del Usuario? (Si / No): ")
-                ? SwitchMenuModifyCustomer(ShowMenuModificarCliente(), c)
-                : false;
+            opt = SwitchMenuModifyCustomer(ShowMenuModificarCliente(), c);
         }
     }
 
@@ -39,39 +37,39 @@ public class S_CustomerModify
         {
             case 1:
                 var tempDn = ValidateInput.ValidateInteger("Ingrese el nuevo DNI: ", -1, 99999999, true);
-                c.Doc = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDn : c.Doc;
+                c.dni = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDn : c.dni;
                 break;
             case 2:
                 var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
-                c.Name = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : c.Name;
+                c.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : c.nombre;
                 break;
             case 3:
                 var tempA = ValidateInput.ValidateString("Ingrese el nuevo Apellido: ", "IsLetter");
-                c.LastName = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : c.LastName;
+                c.apellido = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : c.apellido;
                 break;
             case 4:
                 var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
-                c.Address = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : c.Address;
+                c.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : c.direccion;
                 break;
             case 5:
                 var tempE = ValidateInput.ValidateString("Ingrese el nuevo Email: ");
-                c.Email = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : c.Email;
+                c.email = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : c.email;
                 break;
             case 6:
                 var tempT =
                     ValidateInput.ValidateString("Ingrese el nuevo Telefono (Sin espcios/guiones): ", "IsDigit");
-                c.Phone = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempT : c.Phone;
+                c.telefono = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempT : c.telefono;
                 break;
             case 7:
                 var tempL = ValidateInput.ValidateString("Ingrese el nuevo Legajo: ", "IsDigit");
-                c.User = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempL : c.User;
+                c.usuario = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempL : c.usuario;
                 break;
             case 8:
                 var tempFn = ValidateInput.ValidateDateTime("Ingrese la nueva Fecha de Nacimiento (DD-MM-YYYY): ",
                     "superior a la Fecha de Hoy", "less", DateTime.Now);
-                c.DateBirth = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+                c.fechaNacimiento = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
                     ? tempFn
-                    : c.DateBirth;
+                    : c.fechaNacimiento;
                 break;
             default:
                 return false;
