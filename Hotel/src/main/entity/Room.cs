@@ -46,7 +46,7 @@ public class Room
     public string ToReport()
     {
         return
-            "     Código: " + idHotel + "\n" +
+            "     Código: " + id + "\n" +
             "     Cantidad Plazas: " + cantidadPlazas + "\n" +
             "     Categoria: " + categoria + "\n" +
             "     Precio: " + precio + "\n" +

@@ -6,7 +6,6 @@ namespace Hotel.main.services.CustomerServices;
 
 public class S_CustomerCreate
 {
-
     public Customer NewCustomer()
     {
         Console.Clear();

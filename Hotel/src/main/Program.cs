@@ -44,11 +44,9 @@ public static class Program
 
     private static void UploadData()
     {
-        // _customer = new S_Customer().GetCustomerData(GetRecord());
-        _customer = new S_Customer().GetCustomerData(882831);
-        _customer.usuario = "888086";
-        _reservation = new S_Reservation().GetReservationsData(_customer.usuario);
-        _hotels = new S_Hotel().GetHotelesData(_customer.usuario);
+        _customer = new S_Customer().GetCustomerData(GetRecord());
+        _reservation = new S_Reservation().GetReservationsData(new S_Customer().SelectCustomer().usuario);
+        _hotels = new S_Hotel().GetHotelesData(new S_Customer().SelectCustomer().usuario);
     }
 
     private static int GetRecord()
@@ -65,7 +63,7 @@ public static class Program
         Console.WriteLine("║     1. Crear                                       ║");
         Console.WriteLine("║     2. Consultar                                   ║");
         Console.WriteLine("║     3. Modificar                                   ║");
-        // Console.WriteLine("║     4. Modificar                                   ║");
+        // Console.WriteLine("║     4. Borrar                                      ║");
         Console.WriteLine("║     0. Salir                                       ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 4, true);
@@ -117,7 +115,7 @@ public static class Program
                 new S_CustomerCreate().NewCustomer();
                 break;
             case 2: // Reserva
-                new S_ReservationCreate().NewReservation(_customer);
+                _reservation.Add(new S_ReservationCreate().NewReservation(_customer));
                 break;
             case 3: // Hotel
                 new S_HotelCreate().NewHotel(_customer);
@@ -161,7 +159,7 @@ public static class Program
                 new S_CustomerModify().ModifyCustomer(_customer);
                 break;
             case 2: // Reserva
-                new S_ReservationModify().ModifyReserva(_reservation);
+                new S_ReservationModify().ModifyReservation(_reservation);
                 break;
             case 3: // Hotel
                 new S_HotelModifiy().HotelModify(_hotels);

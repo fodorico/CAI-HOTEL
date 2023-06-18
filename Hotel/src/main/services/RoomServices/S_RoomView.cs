@@ -13,6 +13,7 @@ public class S_RoomView
             Console.Clear();
             ShowData();
             var listRoom = new S_Room().GetSpecificRooms(h, r);
+            Console.WriteLine("══════════════════════════════════════════════════════");
             foreach (var room in listRoom)
             {
                 ShowDataRoom(room);
@@ -30,7 +31,7 @@ public class S_RoomView
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
-    private static void ShowDataRoom(Room h)
+    public void ShowDataRoom(Room h)
     {
         Console.WriteLine(h.ToReport());
         Console.WriteLine("══════════════════════════════════════════════════════");

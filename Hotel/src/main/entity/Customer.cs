@@ -10,20 +10,20 @@ public class Customer : A_Person
     {
     }
 
-    public Customer(int id, int dni, string nombre, string apellido, string direccion, string email,
-        string telefono, string usuario, DateTime fechaNacimiento, DateTime fechaAlta, bool activo)
+    public Customer(int id, int doc, string name, string lastName, string address, string email,
+        string phone, string user, DateTime dateBirth, DateTime entryDate, bool active)
     {
         this.id = id;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
+        dni = doc;
+        nombre = name;
+        apellido = lastName;
+        direccion = address;
         this.email = email;
-        this.telefono = telefono;
-        this.usuario = usuario;
-        this.fechaNacimiento = fechaNacimiento;
-        this.fechaAlta = fechaAlta;
-        this.activo = activo;
+        telefono = phone;
+        usuario = user;
+        fechaNacimiento = dateBirth;
+        fechaAlta = entryDate;
+        activo = active;
     }
 
     public NameValueCollection CustomerMap(Customer c)

@@ -12,6 +12,7 @@ public class S_HotelView
         {
             Console.Clear();
             ShowData();
+            Console.WriteLine("══════════════════════════════════════════════════════");
             foreach (var hotel in h)
             {
                 ShowDataHotel(hotel);
@@ -29,7 +30,7 @@ public class S_HotelView
         Console.WriteLine("══════════════════════════════════════════════════════");
     }
 
-    private static void ShowDataHotel(entity.Hotel h)
+    public void ShowDataHotel(entity.Hotel h)
     {
         Console.WriteLine(h.ToReport());
         Console.WriteLine("══════════════════════════════════════════════════════");

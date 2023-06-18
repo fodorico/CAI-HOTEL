@@ -34,10 +34,10 @@ public class S_RoomModify
             Console.WriteLine("Por favor coloque un código valido!");
         }
 
-        return SwitchMenuHabitacion(ShowMenuHabitacion(), hab);
+        return SwitchMenuRoom(ShowMenuRoom(), hab);
     }
 
-    private int ShowMenuHabitacion()
+    private int ShowMenuRoom()
     {
         Console.WriteLine("══════════════════════════════════════════════════════");
         Console.WriteLine("                    Menú Habitacion                   ");
@@ -52,33 +52,53 @@ public class S_RoomModify
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 5, true);
     }
 
-    private bool SwitchMenuHabitacion(int i, Room r)
+    private bool SwitchMenuRoom(int i, Room r)
     {
         switch (i)
         {
             case 1:
-                var tempCP = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Plazas: ");
-                r.cantidadPlazas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
-                    ? tempCP
-                    : r.cantidadPlazas;
+                SetNewQuantitySpaces(r);
                 break;
             case 2:
-                var tempC = ValidateInput.ValidateString("Ingrese la nueva Categoria: ", "IsLetter");
-                r.categoria = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempC : r.categoria;
+                SetNewCategory(ref r);
                 break;
             case 3:
-                var tempP = ValidateInput.ValidateInteger("Ingrese el nuevo Precio: ");
-                r.precio = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempP : r.precio;
+                SetNewPrice(ref r);
                 break;
             case 4:
-                var tempA = ValidateInput.ValidateBoolean("Ingrese si es Cancelable (Si/No): ");
-                r.cancelable = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : r.cancelable;
+                SetNewCancelable(ref r);
                 break;
             default:
                 return false;
         }
 
         new D_Room().Update(r);
-        return true;
+        return false;
+    }
+
+    private static void SetNewQuantitySpaces(Room r)
+    {
+        var tempCP = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Plazas: ");
+        r.cantidadPlazas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI"
+            ? tempCP
+            : r.cantidadPlazas;
+    }
+
+    private static void SetNewCategory(ref Room r)
+    {
+        var tempC = ValidateInput.ValidateString("Ingrese la nueva Categoria: ", "IsLetter");
+        r.categoria = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempC : r.categoria;
+    }
+
+    private static void SetNewPrice(ref Room r)
+    {
+        var tempP = ValidateInput.ValidateInteger("Ingrese el nuevo Precio: ");
+        r.precio = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempP : r.precio;
+    }
+
+    private static void SetNewCancelable(ref Room r)
+    {
+        var tempA = ValidateInput.ValidateBoolean("Ingrese si es Cancelable (Si/No): ");
+        r.cancelable = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : r.cancelable;
     }
 }

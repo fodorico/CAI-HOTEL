@@ -6,7 +6,7 @@ namespace Hotel.main.services.HotelServices;
 
 public class S_HotelCreate
 {
-    public entity.Hotel NewHotel(Customer c)
+    public void NewHotel(Customer c)
     {
         Console.Clear();
         var nextId = new S_Hotel().GetAllHoteles()[0].id + 1;
@@ -22,7 +22,5 @@ public class S_HotelCreate
         {
             new D_Hotel().Insert(newHotel);
         }
-
-        return newHotel;
     }
 }

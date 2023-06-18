@@ -1,6 +1,7 @@
 using System.Globalization;
 using Hotel.main.dao;
 using Hotel.main.entity;
+using Hotel.main.services.CustomerServices;
 using Hotel.main.services.RoomServices;
 using Utils;
 
@@ -18,10 +19,10 @@ public class S_ReservationCreate
             "inferior a la Fecha de Ingreso", "more", tempFi).ToString("d", CultureInfo.CurrentCulture);
         var newReservation = new Reservation(
             nextId,
-            int.Parse(c.usuario),
+            int.Parse(new S_Customer().SelectCustomer().usuario),
             ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Huespedes: "),
             c.id,
-            new S_Room().SelectIdRoom(),
+            new S_Room().SelectIdRoom().id,
             tempFi.ToString("d", CultureInfo.CurrentCulture),
             tempFe
         );

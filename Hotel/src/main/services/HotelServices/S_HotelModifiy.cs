@@ -54,26 +54,46 @@ public class S_HotelModifiy
         switch (i)
         {
             case 1:
-                var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
-                h.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.nombre;
+                SetNewName(ref h);
                 break;
             case 2:
-                var tempE = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Estrellas: ", -1, 6, true);
-                h.estrellas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.estrellas;
+                SetNewStars(ref h);
                 break;
             case 3:
-                var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
-                h.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.direccion;
+                SetNewAddress(ref h);
                 break;
             case 4:
-                var tempA = ValidateInput.ValidateBoolean("Ingrese si tiene Comodidades (Si/No): ");
-                h.amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.amenities;
+                SetNewAmenities(ref h);
                 break;
             default:
                 return false;
         }
 
         new D_Hotel().Update(h);
-        return true;
+        return false;
+    }
+
+    private static void SetNewName(ref entity.Hotel h)
+    {
+        var tempN = ValidateInput.ValidateString("Ingrese el nuevo Nombre: ", "IsLetter");
+        h.nombre = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempN : h.nombre;
+    }
+
+    private static void SetNewStars(ref entity.Hotel h)
+    {
+        var tempE = ValidateInput.ValidateInteger("Ingrese la nueva cantidad de Estrellas: ", -1, 6, true);
+        h.estrellas = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempE : h.estrellas;
+    }
+
+    private static void SetNewAddress(ref entity.Hotel h)
+    {
+        var tempDi = ValidateInput.ValidateString("Ingrese la nueva Dirección: ");
+        h.direccion = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDi : h.direccion;
+    }
+
+    private static void SetNewAmenities(ref entity.Hotel h)
+    {
+        var tempA = ValidateInput.ValidateBoolean("Ingrese si tiene Comodidades (Si/No): ");
+        h.amenities = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempA : h.amenities;
     }
 }
