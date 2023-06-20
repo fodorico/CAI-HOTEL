@@ -18,13 +18,12 @@ public static class Program
     {
         while (true)
         {
-            Console.WriteLine($"Bienvenido!!");
             Console.WriteLine("╔════════════════════════════════════════════════════╗");
-            Console.WriteLine("║                  ¡ Bienvenido !                    ║");
+            Console.WriteLine("║              ¡ Bienvenido al Hotel!                ║");
             Console.WriteLine("╚════════════════════════════════════════════════════╝");
             Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
             GetEmployee();
-            if (ValidateInput.ValidateBoolean("Es un nuevo Usuario? (Si / No): "))
+            if (ValidateInput.ValidateBoolean("Es un Cliente nuevo? (Si / No): "))
             {
                 NewData();
             }
@@ -79,7 +78,7 @@ public static class Program
         Console.WriteLine("║                   Menú Principal                   ║");
         Console.WriteLine("╠════════════════════════════════════════════════════╣");
         Console.WriteLine("║     1. Crear                                       ║");
-        Console.WriteLine("║     2. Consultar                                   ║");
+        Console.WriteLine("║     2. Listado                                     ║");
         Console.WriteLine("║     3. Modificar                                   ║");
         // Console.WriteLine("║     4. Borrar                                      ║");
         Console.WriteLine("║     0. Cerrar sesión                               ║");
