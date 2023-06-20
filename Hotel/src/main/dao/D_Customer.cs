@@ -19,8 +19,15 @@ public class D_Customer : A_JsonConvert<Customer>, D_Factory<Customer>
 
     public Customer Select(string id)
     {
-        var jsonClient = WebHelper.Get("cliente/" + id);
-        return StringToJsonArray(jsonClient)[0];
+        try
+        {
+            var jsonClient = WebHelper.Get("cliente/" + id);
+            return StringToJsonArray(jsonClient)[0];
+        }
+        catch (Exception e)
+        {
+            return new Customer();
+        }
     }
 
     public ResultTransaction Insert(Customer c)
