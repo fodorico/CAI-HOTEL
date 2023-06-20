@@ -27,11 +27,6 @@ public class S_Customer
     private List<Customer> GetCustomerData(int id)
     {
         var result = new D_Customer().Load(id.ToString());
-        if (!result.Any() && id == 888086)
-        {
-            result.Add(new Customer("888086"));
-        }
-
         return result;
     }
 

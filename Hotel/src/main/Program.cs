@@ -16,47 +16,53 @@ public static class Program
 
     public static void Main()
     {
-        Console.WriteLine($"Bienvenido!!");
-        Console.WriteLine("╔════════════════════════════════════════════════════╗");
-        Console.WriteLine("║                  ¡ Bienvenido !                    ║");
-        Console.WriteLine("╚════════════════════════════════════════════════════╝");
-        // if (ValidateInput.ValidateBoolean("Usted es un nuevo usuario? (SI / NO): "))
-        // {
-        //     NewData();
-        // }
-        // else
-        // {
-        Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
-        GetData();
-        Console.WriteLine("Legajo Sugerido de Usuario: 888086");
-        // }
-        UploadData();
         while (true)
         {
-            SwitchMenu(MenuMain(), MenuOptions());
-            Console.Clear();
+            Console.WriteLine($"Bienvenido!!");
+            Console.WriteLine("╔════════════════════════════════════════════════════╗");
+            Console.WriteLine("║                  ¡ Bienvenido !                    ║");
+            Console.WriteLine("╚════════════════════════════════════════════════════╝");
+            Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
+            GetEmployee();
+            if (ValidateInput.ValidateBoolean("Es un nuevo Usuario? (Si / No): "))
+            {
+                NewData();
+            }
+            else
+            {
+                Console.WriteLine("Legajo Sugerido de Usuario: 888086");
+                GetAllDataClient();
+            }
+
+            var session = true;
+            while (session)
+            {
+                var main = MenuMain();
+                session = main != 0 && SwitchMenu(main, MenuOptions());
+
+                Console.Clear();
+            }
         }
     }
 
     private static void NewData()
     {
-        _customer = new S_CustomerCreate().NewCustomer();
+        _client = new S_CustomerCreate().NewCustomer();
     }
 
-    private static void GetData()
+    private static void GetEmployee()
     {
         _customer = new S_Customer().SelectCustomer("Ingrese su número de legajo: ");
     }
 
-    private static void UploadData()
+    private static void GetAllDataClient()
     {
         _client = new S_Customer().SelectCustomer("Ingrese el Legajo del Usuario a tratar: ");
-        if (_client.usuario == "888086")
-        {
-            _client = _customer;
-            _client.usuario = "888086";
-        }
+        GetData();
+    }
 
+    private static void GetData()
+    {
         _reservation = new S_Reservation().GetReservationsData(_client.usuario);
         _hotels = new S_Hotel().GetHotelesData(_client.usuario);
     }
@@ -76,7 +82,7 @@ public static class Program
         Console.WriteLine("║     2. Consultar                                   ║");
         Console.WriteLine("║     3. Modificar                                   ║");
         // Console.WriteLine("║     4. Borrar                                      ║");
-        Console.WriteLine("║     0. Salir                                       ║");
+        Console.WriteLine("║     0. Cerrar sesión                               ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 4, true);
     }
@@ -91,12 +97,12 @@ public static class Program
         Console.WriteLine("║     2. Reservas                                    ║");
         Console.WriteLine("║     3. Hoteles                                     ║");
         Console.WriteLine("║     4. Habitaciones                                ║");
-        Console.WriteLine("║     0. Salir                                       ║");
+        Console.WriteLine("║     0. Volver al Menú Principal                    ║");
         Console.WriteLine("╚════════════════════════════════════════════════════╝");
         return ValidateInput.ValidateInteger("Ingrese la opción deseada: ", -1, 5, true);
     }
 
-    private static void SwitchMenu(int menu, int ops)
+    private static bool SwitchMenu(int menu, int ops)
     {
         switch (menu)
         {
@@ -113,10 +119,12 @@ public static class Program
             //     SwitchDelete(ops);
             //     break;
             default: //Salir
-                Console.Clear();
-                Environment.Exit(1);
-                break;
+                // Console.Clear();
+                // Environment.Exit(1);
+                return false;
         }
+
+        return true;
     }
 
     private static void SwitchCreate(int ops)
@@ -130,7 +138,7 @@ public static class Program
                 var r = new S_ReservationCreate().NewReservation(_client);
                 if (!string.IsNullOrEmpty(r.fechaEgreso))
                 {
-                    _reservation.Add(r);
+                    GetData();
                 }
 
                 break;
@@ -178,15 +186,17 @@ public static class Program
             case 2: // Reserva
                 if (_reservation.Count > 0) new S_ReservationModify().ModifyReservation(_reservation);
                 else Console.WriteLine("No se encuentran reservas registradas!");
+                Comment.StopToThink();
                 break;
             case 3: // Hotel
                 if (_hotels.Count > 0) new S_HotelModifiy().HotelModify(_hotels);
                 else Console.WriteLine("No se encuentran hoteles registrados para a su usuario");
+                Comment.StopToThink();
                 break;
             case 4: // 
                 if (_hotels.Count > 0) new S_RoomModify().RoomMenuModify(_hotels, _reservation);
                 else Console.WriteLine("No se encuentran hoteles registrados para a su usuario");
-
+                Comment.StopToThink();
                 break;
             default: // Salir
                 Console.Clear();

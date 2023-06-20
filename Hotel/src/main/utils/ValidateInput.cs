@@ -119,6 +119,7 @@ public static class ValidateInput
                 //Console.Clear();
                 Console.WriteLine(Message + "Coloque un valor que corresponda.");
             }
+            Console.WriteLine(Message + "Coloque un valor que corresponda.");
         }
     }
 

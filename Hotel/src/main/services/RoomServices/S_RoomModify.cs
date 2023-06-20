@@ -92,7 +92,7 @@ public class S_RoomModify
 
     private static void SetNewPrice(ref Room r)
     {
-        var tempP = ValidateInput.ValidateInteger("Ingrese el nuevo Precio: ");
+        var tempP = ValidateInput.ValidateInteger("Ingrese el nuevo Precio (Valores enteros): ");
         r.precio = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempP : r.precio;
     }
 

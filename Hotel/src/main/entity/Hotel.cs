@@ -41,7 +41,7 @@ public class Hotel
 
     public string ToReport()
     {
-        return "      Código: " + id + "\n" +
+        return "     Código: " + id + "\n" +
                "     Nombre: " + nombre + "\n" +
                "     Estrellas: " + estrellas + "\n" +
                "     Direccion: " + direccion + "\n" +

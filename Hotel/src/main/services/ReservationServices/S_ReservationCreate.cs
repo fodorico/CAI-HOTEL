@@ -1,7 +1,5 @@
-using System.Globalization;
 using Hotel.main.dao;
 using Hotel.main.entity;
-using Hotel.main.services.CustomerServices;
 using Hotel.main.services.RoomServices;
 using Hotel.main.utils;
 
@@ -25,11 +23,12 @@ public class S_ReservationCreate
 
         var room = new S_Room().SelectIdRoom();
         if (tempQg > room.cantidadPlazas)
-            
+
         {
             Console.Clear();
             Console.WriteLine("══════════════════════════════════════════════════════");
-            Console.WriteLine("Seleccionó una Habitación con una capacidad menor a lo solicitado. Se anula la reserva.");
+            Console.WriteLine(
+                "Seleccionó una Habitación con una capacidad menor a lo solicitado. Se anula la reserva.");
             Comment.StopToThink("Para continuar toque una tecla...." +
                                 "\n══════════════════════════════════════════════════════");
             return new Reservation();

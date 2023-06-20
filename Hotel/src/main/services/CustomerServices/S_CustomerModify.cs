@@ -69,7 +69,7 @@ public class S_CustomerModify
 
     private static void SetNewDoc(ref Customer c)
     {
-        var tempDn = ValidateInput.ValidateInteger("Ingrese el nuevo DNI: ", -1, 99999999, true);
+        var tempDn = ValidateInput.ValidateInteger("Ingrese el nuevo DNI (Máximo 8 digitos): ", -1, 100000000, true);
         c.dni = ValidateInput.Confirm(ValidateInput.ConfirmMessage) == "SI" ? tempDn : c.dni;
     }
 
