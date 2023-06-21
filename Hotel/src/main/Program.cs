@@ -16,32 +16,32 @@ public static class Program
 
     public static void Main()
     {
-        while (true)
+        // while (true)
+        // {
+        Console.WriteLine("╔════════════════════════════════════════════════════╗");
+        Console.WriteLine("║              ¡ Bienvenido al Hotel!                ║");
+        Console.WriteLine("╚════════════════════════════════════════════════════╝");
+        Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
+        GetEmployee();
+        if (ValidateInput.ValidateBoolean("Es un Cliente nuevo? (Si / No): "))
         {
-            Console.WriteLine("╔════════════════════════════════════════════════════╗");
-            Console.WriteLine("║              ¡ Bienvenido al Hotel!                ║");
-            Console.WriteLine("╚════════════════════════════════════════════════════╝");
-            Console.WriteLine("Legajo Sugerido a Ingresar: 882831");
-            GetEmployee();
-            if (ValidateInput.ValidateBoolean("Es un Cliente nuevo? (Si / No): "))
-            {
-                NewData();
-            }
-            else
-            {
-                Console.WriteLine("Legajo Sugerido de Usuario: 888086");
-                GetAllDataClient();
-            }
-
-            var session = true;
-            while (session)
-            {
-                var main = MenuMain();
-                session = main != 0 && SwitchMenu(main, MenuOptions());
-
-                Console.Clear();
-            }
+            NewData();
         }
+        else
+        {
+            Console.WriteLine("Legajo Sugerido de Usuario: 888086");
+            GetAllDataClient();
+        }
+
+        var session = true;
+        while (session)
+        {
+            var main = MenuMain();
+            session = main == 0 ? Utils.Exit() : SwitchMenu(main, MenuOptions());
+
+            Console.Clear();
+        }
+        // }
     }
 
     private static void NewData()
@@ -118,8 +118,6 @@ public static class Program
             //     SwitchDelete(ops);
             //     break;
             default: //Salir
-                // Console.Clear();
-                // Environment.Exit(1);
                 return false;
         }
 

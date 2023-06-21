@@ -14,4 +14,12 @@ public static class Utils
     {
         return DateTimeFormatter(dt.ToString(format), format);
     }
+
+    public static bool Exit()
+    {
+        Console.Clear();
+        Console.WriteLine("Gracias por usar nuestro servicio! Toque cualquier tecla para finalizar.");
+        Environment.Exit(1);
+        return false;
+    }
 }
